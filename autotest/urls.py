@@ -19,6 +19,7 @@ from apitest import views
 from product import proviews
 from bug import bugviews
 from set import setviews
+from apptest import appviews
 
 
 urlpatterns = [
@@ -35,4 +36,6 @@ urlpatterns = [
     path('set_manage/', setviews.set_manage),
     path('user/', setviews.set_user),
     path('test_report/',views.test_report)
+    path('appcase_manage/', appviews.appcase_manage),
+    path('appcasestep_manage/', appviews.appcasestep_manage)
 ]
