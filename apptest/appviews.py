@@ -17,7 +17,7 @@ def appcase_manage(request):
 
 #App用例测试步骤
 @login_required
-def appcasestep_manag(request):
+def appcasestep_manage(request):
     username = request.session.get('user', ' ')
     appcasestep_list = Appcasestep.objects.all()
     return render(request, "appcasestep_manage.html", {"user":username, "appcasesteps":appcasestep_list})
