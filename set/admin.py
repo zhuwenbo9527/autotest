@@ -1,4 +1,4 @@
-from django.contrib import admin
+ from django.contrib import admin
 from set.models import Set
 
 class SetAdmin(admin.ModelAdmin):

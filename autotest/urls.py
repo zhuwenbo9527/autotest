@@ -36,7 +36,7 @@ urlpatterns = [
     path('bugs_manage/', bugviews.bug_manage),
     path('set_manage/', setviews.set_manage),
     path('user/', setviews.set_user),
-    path('test_report/',views.test_report),
+    path('test_report/', views.test_report),
     path('appcase_manage/', appviews.appcase_manage),
     path('appcasestep_manage/', appviews.appcasestep_manage),
     path('webcase_manage/', webviews.webcase_manage),
