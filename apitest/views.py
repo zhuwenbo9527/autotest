@@ -42,7 +42,7 @@ def logout(request):
 def apitest_manage(request):
     # 读取所有流程接口数据
     apitest_list = Apitest.objects.all()
-    # 浏览器登录session
+    # 浏览器登录session 
     username = request.session.get('user','')
     # 定义流程接口数据的变量并返回到前端
     return render(request, "apitest_manage.html", {"user": username, "apitests": apitest_list})
