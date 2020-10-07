@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import auth
 from apitest.models import Apitest,Apistep,Apis
 from django.contrib.auth import authenticate, login
+import pymysql
 
 
 def test(request):
@@ -70,15 +71,17 @@ def test_report(request):
     db = pymysql.connect(user='root', db='autotest', passwd='123456', host='127.0.0.1')
     cursor = db.cursor()
     sql1 = 'Select count(id) From apitest_apis where apitest_apis.apistatus = 1'
-    aa = cursor.exceute(sql1)
-    apis_pass_count = [row[0] for row in cursor.fetchmany(aa)[0]]
+    aa = cursor.execute(sql1)
+    apis_pass_count = [row[0] for row in cursor.fetchmany(aa)][0]
     sql2 = 'Select count(id) From apitest_apis Where apitest_apis.apistatus=0'
-    bb = cursor.exceute(sql2)
-    apis_fail_count = [row[0] for row in cursor.fetchmany(bb)[0]]
+    bb = cursor.execute(sql2)
+    apis_fail_count = [row[0] for row in cursor.fetchmany(bb)][0]
     db.close()
-    return render(request, "report.htm;", {"user":username, "apiss":apis_list, "apiscounts":apis_count,
-                                           "apis_pass_counts":apis_pass_count, "apis_fail_counts":apis_fail_count,
+    return render(request, "report.html", {"user":username, "apiss":apis_list, "apiscounts": apis_count,
+                                           "apis_pass_counts": apis_pass_count, "apis_fail_counts": apis_fail_count,
                                            })#把值赋给apiscounts变量
 
+def left(request):
+    return render(request, "left.html")
 
 # Create your views here.

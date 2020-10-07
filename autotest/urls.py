@@ -29,6 +29,7 @@ urlpatterns = [
     path('login/', views.login),
     path('home/', views.home),
     path('logout/', views.logout),
+    #产品管理
     path('product_manage/', proviews.product_manage),
     path('apitest_manage/', views.apitest_manage),
     path('apistep_manage/', views.apistep_manage),
@@ -41,4 +42,5 @@ urlpatterns = [
     path('appcasestep_manage/', appviews.appcasestep_manage),
     path('webcase_manage/', webviews.webcase_manage),
     path('webcasestep_manage/', webviews.webcasestep_manage),
+    path('left/', views.left),
 ]

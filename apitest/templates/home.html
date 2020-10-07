@@ -5,9 +5,12 @@
 <head>
     <title>自动化测试平台</title>
 </head>
-<u1 class="nav navbar-nav navbar-right">
-    <li>欢迎您,<a href="#">{{ user }}</a></li>
-    <li><a href="/login/">退出</a></li>
-</u1>
-</body>
+<frameset id ="framel" rows="*" cols="265,*" framespacing="0" frameborder="yes" border="0">
+    <frame src="../left" name="leftFrame" scrolling="auto" noresize>
+    <frame src="../apitest_manage" name="mainFrame" scrolling="No" noresize>
+</frameset>
+<noframes>
+    <body>
+    </body>
+</noframes>
 </html>

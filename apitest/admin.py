@@ -1,5 +1,5 @@
 from django.contrib import admin
-from apitest.models import Apitest, Apistep ,Apis
+from apitest.models import Apitest, Apistep, Apis
 
 # Register your models here.
 class ApistepAdmin(admin.TabularInline):

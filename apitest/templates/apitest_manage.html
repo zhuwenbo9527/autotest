@@ -2,54 +2,44 @@
         "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="zh-CN">
 <head>
+    {% load bootstrap4 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
     <title>自动化平台测试</title>
 </head>
 <body role="document">
 <!--导航栏-->
-<nav class = "navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
     <div class = "container">
-        <div class = "navbar-header">
-            <a class = "navbar-brand" href="#">自动化测试平添</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-            <u1 class = "nav navbar-nav">
-            <li class="active">
-                <a href="#">流程接口测试</a>
-            </li>
-            <li><a href = "#"流程接口测试步骤></a></li>
-            </u1>
-            <u1 class="nav navbar-nav navbar-right">
+            <a class = "navbar-brand" href="#">自动化测试平台 </a>
+            <ul class = "nav justify-content-center">
+                <li class = "nav-link"><a href="#">流程接口测试</a></li>
+                <li class = "nav-link"><a href="/apistep_manage/">流程接口测试步骤</a></li>
+            </ul>
+            <u1 class="nav justify-content-end">
                 <li><a href="#">{{ user }}</a></li>
                 <li><a href="/logout/">退出</a></li>
             </u1>
-        </div>
     </div>
 </nav>
 <!--流程接口列表-->
-<div class ="row" style = "padding-top:20px;">
+<div class ="row" style = "padding-top:70px;">
     <div class="col-md-11">
         <table class="table table-striped">
             <thead>
             <tr>
                 <th>ID</th>
-                <th>产品</th>
-                <th>流程接口测试用例名称</th>
-                <th>流程接口描述</th>
-                <th>测试负责人</th>
-                <th>测试结果</th>
-                <th>测试用例步骤</th>
+                <th>业务接口流程名称</th>
+                <th>执行人</th>
+                <th>结果</th>
             </tr>
             </thead>
             <tbody>
             {% for apitest in apitests %}
             <tr>
                 <td>{{ apitest.id }}</td>
-                <td>{{ apitest.Product.productname}}</td>
-                <td>{{ apitest.apitestname }}</td>
-                <td>{{ apitest.apitestdesc }}</td>
+                <td>{{ apitest.apitestname}}</td>
                 <td>{{ apitest.apitester }}</td>
-                <td>{{ apitest.apitestresult }}</td>
-                <td>{{ apitest.Apistep.apiteststep }}</td>
             </tr>
             {% endfor %}
             </tbody>
