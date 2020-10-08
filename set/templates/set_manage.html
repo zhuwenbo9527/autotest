@@ -20,10 +20,17 @@
         <ul class="nav-link"><a style="color:white" href="/logout/">退出</a></ul>
     </div>
 </nav>
-
+<!--搜索栏-->
+<div class="page-header" style="padding-top:70px;">
+    <form class="navbar-form" method="get" action="/setsearch/">
+        {% csrf_token %}
+        <input type="search" name="setname" placeholder="名称" required>
+        <button type="submit">搜索</button>
+    </form>
+</div>
 <!-设置列表-->
 <div class="row" style="padding-top: 70px">
-    <div class="col-md-ll">
+    <div class="col-md-11">
         <table class="table table-striped">
             <thead>
             <tr>

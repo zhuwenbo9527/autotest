@@ -80,6 +80,13 @@ def test_report(request):
     return render(request, "report.html", {"user":username, "apiss":apis_list, "apiscounts": apis_count,
                                            "apis_pass_counts": apis_pass_count, "apis_fail_counts": apis_fail_count,
                                            })#把值赋给apiscounts变量
+@login_required
+def apisearch(request):
+    username = request.session.get('user', '')
+    search_apitestname = request.GET.get("apitestname", "")
+    apitest_list = Apitest.objects.filter(apitestname__icontains=search_apitestname)
+    return render(request, 'apitest_manage.html', {"user": username, "apitests": apitest_list})
+
 
 def left(request):
     return render(request, "left.html")
