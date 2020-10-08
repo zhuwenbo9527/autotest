@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from product.models import Product
+from django.contrib.auth.decorators import login_required
 
 def product_manage(request):
     username = request.session.get('user','')
@@ -7,3 +8,9 @@ def product_manage(request):
     return render(request,"product_manage.html",{'user':username,"products":product_list})
 
 # Create your views here.
+@login_required
+def productsearch(request):
+    username = request.session.get('user', '')
+    search_productname = request.GET.get("productname", "")
+    product_list = Product.objects.filter(productname__icontains=search_productname)
+    return render(request, 'product_manage.html', {"user": username, "products": product_list})
