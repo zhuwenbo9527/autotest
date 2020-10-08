@@ -12,20 +12,23 @@
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
     <div class="container">
         <a class="navbar-brand" href="#">&nbsp;</a>
-        <u1 class="nav justify-content-center">
-        <li><a style="color:white" href="/apitest_manage/">流程接口测试用例</a></li>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <li class="active"><a style="'color:white" href="/apis_manage/">单一接口测试用例</a></li>
-        </u1>
-        <u1 class="nav justify-content-end">
-            <li class="nav link"><a style="color:white" href="#">{{ user }}</li>
-            <li class="nav link"><a style="color:white" href="/logout/">退出</li>
-        </u1>
+        <ul class = "nav justify-content-center">
+                <li><a href="/apitest_manage/">流程接口测试用例</a></li>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <li class = "active"><a style="color:white" href="/apistep_manage/">流程接口测试步骤</a></li>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <li class = "active"><a style="color:white" href="/apis_manage/">单一接口测试用例</a></li>
+            </ul>
+            <u1 class="nav justify-content-end">
+                <li><a href="#">{{ user }}</a></li>
+                <li><a href="/logout/">退出</a></li>
+            </u1>
     </div>
 </nav>
 <!--单一接口测试用例-->
-<div class="row" style = "padding-top: 20px">
+<div class="row" style = "padding-top: 70px">
     <div class="col-md-11">
         <table class="table table-striped">
             <thead>

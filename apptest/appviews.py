@@ -13,7 +13,7 @@ from apptest.models import Appcase,Appcasestep
 def appcase_manage(request):
     appcase_list = Appcase.objects.all()
     username = request.session.get('user', '')
-    return render(request, "appcase_manage,html", {"user": username, "appcase":appcase_list})
+    return render(request, "appcase_manage.html", {"user": username, "appcase":appcase_list})
 
 #App用例测试步骤
 @login_required

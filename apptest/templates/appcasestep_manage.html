@@ -3,17 +3,23 @@
 <html lang="zh-cn">
 <head>
     {% load bootstrap4 %}
-    {% loadstrap_css %}
+    {% bootstrap_css %}
     {% bootstrap_javascript %}
     <title>产品自动化测试平台</title>
 </head>
 <body role="document">
 <!--导航栏-->
-<nav class="navbar navbar-expand-sm" bg-dark navbar-dark fixed-top">
-<div class="container">
-    <a class="navbar-brand" href="#">&nbsp;</a>
-    <ul class ="nav justify-content-center">
-    </ul>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+    <div class = "container">
+            <a class = "navbar-brand" href="#">&nbsp; </a>
+            <ul class = "nav justify-content-center">
+            <li><a style="color:white" href="/appcase_manage/">app测试用例</a></li>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <li class = "active"><a style="color:white" href="/appcasestep_manage/">app测试步骤</a></li>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </ul>
     <ul class="nav justify-content-end">
     <li class="nav-link"><a style="color:white" href="#">{{ user }}</a></li>
     <li class = "nav-link"><a style="color:white" href = "/logout/">退出</a></li>
@@ -22,7 +28,7 @@
 </nav>
 <!--流程测试步骤-->
 <div class="row" style="padding-top:70px">
-    <div class="col-md-ll">
+    <div class="col-md-11">
         <table class="table table-striped">
             <thead>
             <tr>

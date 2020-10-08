@@ -1,12 +1,19 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
         "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+    {% load bootstrap4 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
 <head>
     <title>test</title>
 </head>
 <body>
-<navbar class="navbar navbar-inverse navbar-fixed-top "></navbar>
-<table border="0">
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+<div class="container">
+    <a class="navbar-brand" href="../apistep_manage" target="mainFrame">《自动化平台测试开发》</a>
+</div>
+</nav>
+<table border="0" >
     <tr><td>&nbsp;</td></tr>
     <tr><td>&nbsp;</td></tr>
     <tr><td>&nbsp;</td></tr>
@@ -18,29 +25,17 @@
     <tr><td>&nbsp;</td></tr>
     <tr>
         <td>-----------------------------------</td>
+    </tr>
     <tr><td>&nbsp;</td></tr>
      <tr>
-        <td><a href="../apis_manage" target="mainFrame">&nbsp;&nbsp;单一接口测试用例></a></td>
+        <td><a href="../apitest_manage" target="mainFrame">&nbsp;&nbsp;用例管理></a></td>
     </tr>
     <tr><td>&nbsp;</td></tr>
     <tr>
 
     <tr><td>&nbsp;</td></tr>
      <tr>
-        <td><a href="../apitest_manage" target="mainFrame">&nbsp;&nbsp;流程接口列表></a></td>
-    </tr>
-    <tr><td>&nbsp;</td></tr>
-    <tr>
-
-    </tr>
-    <tr><td>&nbsp;</td></tr>
-    <tr>
-        <td><a href="../apistep_manage" target="mainFrame">&nbsp;&nbsp;流程接口测试步骤></a></td>
-    </tr>
-    <tr><td>&nbsp;</td></tr>
-    <tr><td>&nbsp;</td></tr>
-    <tr>
-        <td><a href="http://127.0.0.1:8000/admin/apitest/apitest/add" target="mainFrame" >&nbsp;&nbsp;新增api接口测试用例</a></td>
+        <td><a href="../apistep_manage" target="mainFrame">&nbsp;&nbsp;流程接口测试用例></a></td>
     </tr>
     <tr><td>&nbsp;</td></tr>
     <tr>
@@ -48,9 +43,28 @@
     </tr>
     <tr><td>&nbsp;</td></tr>
     <tr>
-        <td><a href="#" target="mainFrame">&nbsp;&nbsp;任务管理</a></td>
+        <td><a href="../appcase_manage" target="mainFrame">&nbsp;&nbsp;app用例管理></a></td>
     </tr>
-        <tr>
+    <tr><td>&nbsp;</td></tr>
+    <tr><td>&nbsp;</td></tr>
+    <tr>
+        <td><a href="../appcasestep_manage" target="mainFrame" >&nbsp;&nbsp;app测试用例</a></td>
+    </tr>
+    <tr><td>&nbsp;</td></tr>
+    <tr>
+        <td>-----------------------------------</td>
+    </tr>
+    <tr><td>&nbsp;</td></tr>
+    <tr>
+        <td><a href="../webcase_manage" target="mainFrame">&nbsp;&nbsp;web用例管理></a></td>
+    </tr>
+    <tr><td>&nbsp;</td></tr>
+    <tr><td>&nbsp;</td></tr>
+    <tr>
+        <td><a href="../webcasestep_manage" target="mainFrame" >&nbsp;&nbsp;web测试用例</a></td>
+    </tr>
+    <tr><td>&nbsp;</td></tr>
+    <tr>
         <td>-----------------------------------</td>
     </tr>
     <tr><td>&nbsp;</td></tr>
