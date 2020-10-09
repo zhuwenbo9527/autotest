@@ -3,7 +3,7 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth
 from django.contrib.auth import authenticate,login
-from apptest.models import Appcase,Appcasestep
+from apptest.models import Appcase, Appcasestep
 
 
 # Create your views here.
@@ -21,3 +21,10 @@ def appcasestep_manage(request):
     username = request.session.get('user', ' ')
     appcasestep_list = Appcasestep.objects.all()
     return render(request, "appcasestep_manage.html", {"user":username, "appcasesteps":appcasestep_list})
+
+@login_required
+def appsearch(request):
+    username = request.session.get('user', '')
+    search_apptestname = request.GET.get("apptestname", "")
+    apptest_list = Appcase.objects.filter(apptestname__icontains=search_apptestname)
+    return render(request, 'apptest_manage.html', {"user": username, "apptests": apptest_list})

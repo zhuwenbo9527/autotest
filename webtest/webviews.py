@@ -18,3 +18,10 @@ def webcasestep_manage(request):
     webcasestep_list = Webcasestep.objects.all()
     return render(request, "webcasestep_manage.html", {'user':username,"webcasesteps": webcasestep_list})
 # Create your views here.
+
+@login_required
+def websearch(request):
+    username = request.session.get('user', '')
+    search_webtestname = request.GET.get("webtestname", "")
+    webtest_list = Webcase.objects.filter(webtestname__icontains=search_webtestname)
+    return render(request, 'webtest_manage.html', {"user": username, "webtests": webtest_list})

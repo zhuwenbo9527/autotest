@@ -45,5 +45,7 @@ urlpatterns = [
     path('left/', views.left),
     path('apisearch/', views.apisearch),
     path('setsearch/', setviews.setsearch),
-    path('productsearch/', proviews.productsearch)
+    path('productsearch/', proviews.productsearch),
+    path('appsearch/', appviews.appsearch),
+    path('websearch/', webviews.websearch)
 ]
