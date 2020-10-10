@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import auth
 from apitest.models import Apitest,Apistep,Apis
 from django.contrib.auth import authenticate, login
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import pymysql
 
 
@@ -87,8 +88,32 @@ def apisearch(request):
     apitest_list = Apitest.objects.filter(apitestname__icontains=search_apitestname)
     return render(request, 'apitest_manage.html', {"user": username, "apitests": apitest_list})
 
+@login_required
+def apistepsearch(request):
+    username = request.session.get('user', '')
+    search_apitestname = request.GET.get("apitestname", "")
+    apitestname_list = Apitest.objects.filter(apitestname__icontains=search_apitestname)
+    return render(request, 'apistep_manage.html', {"user": username, "apisteps": apitestname_list})
+
 
 def left(request):
     return render(request, "left.html")
+"""
+@login_required
+def apitest_manage(request):
+    apitest_list = Apitest.objects.all()
+    username = request.session.get('user', '')
+    paginator = Paginator(apitest_list, 8)
+    page = request.Get.get('page', 1)
+    currentPage=int(page)
+    try:
+        apitest_list = paginator.page(page)
+    except PageNotAnInteger:
+        apitest_list = paginator.page(1)
+    except EmptyPage:
+        apitest_list = paginator.page(paginator.num_pages)
+
+    return render(request, " apitest_manage.html", {"user":username}, "apitest:apitest_list")
+"""
 
 # Create your views here.

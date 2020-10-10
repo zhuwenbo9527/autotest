@@ -53,5 +53,38 @@
         </table>
     </div>
 </div>
+
+<div class="container nav justify-content-center ">
+    <ul class="pagination" id="pager">
+        {# 上一页链接开始 #}
+        {% if  apitest.has_previous %}
+            {# 如果有上一页，则正常显示上一页链接 #}
+            <li class="previous">
+                <a href="/product_manage/?page={{ products.previous_page_number }}">上一页</a></li>
+            {# 上一页标签 #}
+            {% else %}
+            <li class="previous disabled"><a href="#">上一页</a></li>
+            {% endif %}
+            {# 上一页标签结束 #}
+            {% for num in products.paginator.page_range %}
+                {% if num == currentpage %}
+            <li class="item active"><a href="/product_manage/?page={{ num }}">&nbsp; {{ num }}> &nbsp;</a>
+                {% else %}
+                <li class="item"><a href="/product_manage/?page={{ num }}">&nbsp; {{ num }} &nbsp;</a>
+                {% endif %}
+            {% endfor %}
+        {# 下一页链接开始 #}
+            {% if products.has_next %}
+            {# 如果有下一页，则正常显示下一页链接 #}
+            <li class="next">
+                <a href="/product_manage/?page={{ products.next_page_number }}">下一页</a></li>
+            {% else %}
+        <li class="next disabled"><a herf="#">下一页</a></li>
+            {% endif %}
+            {#下一页结束#}
+            </li>
+    </ul>
+
+</div>
 </body>
 </html>
