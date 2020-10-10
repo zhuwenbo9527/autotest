@@ -61,7 +61,7 @@ def apistep_manage(request):
 def apis_manage(request):
     username = request.session.get('user','')
     apis_list = Apis.objects.all()
-    return render(request, "apis_manage.html", {'user': username, "apiss": apis_list})
+    return render(request, "apis_manage.html", {'user': username, "apis": apis_list})
 
 @login_required
 def test_report(request):
@@ -77,7 +77,7 @@ def test_report(request):
     bb = cursor.execute(sql2)
     apis_fail_count = [row[0] for row in cursor.fetchmany(bb)][0]
     db.close()
-    return render(request, "report.html", {"user":username, "apiss":apis_list, "apiscounts": apis_count,
+    return render(request, "report.html", {"user":username, "apis":apis_list, "apiscounts": apis_count,
                                            "apis_pass_counts": apis_pass_count, "apis_fail_counts": apis_fail_count,
                                            })#把值赋给apiscounts变量
 @login_required

@@ -28,9 +28,9 @@
 </nav>
 <!--搜索栏-->
 <div class="page-header" style="padding-top:70px;">
-    <form class="navbar-form" method="get" action="/appsearch">
+    <form class="navbar-form" method="get" action="/appsearch/">
         {% csrf_token %}
-        <input type="search" name="apptestname" placeholder="名称" required>
+        <input type="search" name="appcasename" placeholder="名称" required>
         <button type="submit">搜索</button>
     </form>
 </div>
@@ -50,7 +50,7 @@
             </tr>
             </thead>
             <tbody>
-            {%  for appcase in cppcases %}
+            {%  for appcase in appcases %}
             <tr>
                 <td>{{ appcase.id }}</td>
                 <td>{{ appcase.Product.productname }}</td>

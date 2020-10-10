@@ -13,7 +13,7 @@ from apptest.models import Appcase, Appcasestep
 def appcase_manage(request):
     appcase_list = Appcase.objects.all()
     username = request.session.get('user', '')
-    return render(request, "appcase_manage.html", {"user": username, "appcase":appcase_list})
+    return render(request, "appcase_manage.html", {"user": username, "appcases":appcase_list})
 
 #App用例测试步骤
 @login_required
@@ -25,6 +25,13 @@ def appcasestep_manage(request):
 @login_required
 def appsearch(request):
     username = request.session.get('user', '')
-    search_apptestname = request.GET.get("apptestname", "")
-    apptest_list = Appcase.objects.filter(apptestname__icontains=search_apptestname)
-    return render(request, 'apptest_manage.html', {"user": username, "apptests": apptest_list})
+    search_appcasename = request.GET.get("appcasename", "")
+    appcase_list = Appcase.objects.filter(appcasename__icontains=search_appcasename)
+    return render(request, 'appcase_manage.html', {"user": username, "appcases": appcase_list})
+
+@login_required
+def appstepsearch(request):
+    username = request.session.get('user', '')
+    search_appcasename = request.GET.get("appcasename", "")
+    appcase_list = Appcasestep.objects.filter(appcasename__icontains=search_appcasename)
+    return render(request, 'appcasestep_manage.html', {"user": username, "appcasesteps": appcase_list})

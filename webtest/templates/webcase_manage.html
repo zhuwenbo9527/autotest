@@ -28,9 +28,9 @@
 </nav>
 <!--搜索栏-->
 <div class="page-header" style="padding-top:70px;">
-    <form class="navbar-form" method="get" action="/websearch">
+    <form class="navbar-form" method="get" action="/websearch/">
         {% csrf_token %}
-        <input type="search" name="webtestname" placeholder="名称" required>
+        <input type="search" name="webcasename" placeholder="名称" required>
         <button type="submit">搜索</button>
     </form>
 </div>
@@ -46,7 +46,6 @@
                 <th>测试结果</th>
                 <th>测试负责人</th>
                 <th>时间</th>
-                <th>测试用例步骤</th>
             </tr>
             </thead>
         <tbody>
@@ -58,8 +57,6 @@
             <td>{{ webcase.webtestresult }}</td>
             <td>{{ webcase.webtester }}</td>
             <td>{{ webcase.create_time }}</td>
-            <td><a href="#">{{ webcase.webcasestep }}</a></td>
-            <td>{{ webcase.webcasestep }}</td>
         </tr>
         {% endfor %}
         </tbody>

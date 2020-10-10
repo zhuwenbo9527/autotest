@@ -29,7 +29,7 @@
 </nav>
 <!--搜索栏-->
 <div class="page-header" style="padding-top:70px;">
-    <form class="navbar-form" method="get" action="/apisearch">
+    <form class="navbar-form" method="get" action="/apisearch/">
         {% csrf_token %}
         <input type="search" name="apitestname" placeholder="名称" required>
         <button type="submit">搜索</button>
@@ -53,6 +53,7 @@
                 <td>{{ apitest.id }}</td>
                 <td>{{ apitest.apitestname}}</td>
                 <td>{{ apitest.apitester }}</td>
+                <td>{{ apitest.apitestresult }}</td>
             </tr>
             {% endfor %}
             </tbody>
