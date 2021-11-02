@@ -34,28 +34,42 @@
             <thead>
             <tr>
                 <th>ID</th>
-                <th>产品</th>
-                <th>单一接口测试用例名称</th>
-                <th>地址</th>
-                <th>参数=值</th>
-                <th>方法</th>
-                <th>预期结果</th>
-                <th>测试结果</th>
-                <th>时间</th>
+                <th>模块名称</th>
+                <th>用例名称</th>
+                <th>用例标题</th>
+                <th>用例链接</th>
+                <th>缺陷地址</th>
+                <th>用例方法</th>
+                <th>接口路径</th>
+                <th>请求头</th>
+                <th>请求体</th>
+                <th>是否启用</th>
+                <th>预期响应</th>
+                <th>实际响应</th>
+                <th>实际结果</th>
+                <th>测试负责人</th>
+                <th>创建时间</th>
             </tr>
             </thead>
             <tbody>
             {% for apis in apiss %}
                 <tr>
                 <td>{{ apis.id }}</td>
-                <td>{{ apis.Product.productname }}</td>
-                <td>{{ apis.apiname }}</td>
-                <td>{{ apis.apiurl }}</td>
-                <td>{{ apis.apiparamvalue }}</td>
-                <td>{{ apis.apimethod }}</td>
-                <td>{{ apis.apiresult }}</td>
-                <td>{{ apis.apistatus }}</td>
-                <td>{{ apis.create_time }}</td>
+                <td>{{ apis.feature }}</td>
+                <td>{{ apis.story }}</td>
+                <td>{{ apis.title }}</td>
+                <td>{{ apis.link }}</td>
+                <td>{{ apis.issue }}</td>
+                <td>{{ apis.url }}</td>
+                <td>{{ apis.method }}</td>
+                <td>{{ apis.headers }}</td>
+                <td>{{ apis.requestbody }}</td>
+                <td>{{ apis.enable }}</td>
+                <td>{{ apis.exceptresponse }}</td>
+                <td>{{ apis.actualresponse }}</td>
+                <td>{{ apis.result }}</td>
+                <td>{{ apis.tester }}</td>
+                <td>{{ apis.creationtime }}</td>
                 </tr>
             {% endfor %}
             </tbody>

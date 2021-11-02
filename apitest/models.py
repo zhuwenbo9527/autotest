@@ -2,6 +2,7 @@ from django.db import models
 from product.models import Product
 # Create your models here.
 
+
 class Apitest(models.Model):
 
     Product = models.ForeignKey('product.Product', on_delete=models.CASCADE, null=True)
@@ -44,18 +45,26 @@ class Apistep(models.Model):
 
 class Apis(models.Model):
 
-    Product = models.ForeignKey('product.Product', on_delete = models.CASCADE,null=True)
-    apiname = models.CharField('接口名称', max_length=100)
-    apirul = models.CharField('url地址', max_length=200)
-    apiparamvalue = models.CharField('请求参数和值', max_length=800)
-    REQUEST_METHOD = (('0', 'get'), ('1', 'post'), ('2', 'put'), ('3', 'delete'), ('4','patch'))
-    apimethod = models.CharField(verbose_name='请求方法', choices=REQUEST_METHOD, default='0', max_length=200)
-    apiresult = models.CharField('预期结果', max_length=200)
-    apistatus = models.BooleanField('是否通过')
+    Product = models.ForeignKey('product.Product', on_delete=models.CASCADE, null=True)
+    feature = models.CharField('模块名称', max_length=50, null=True)
+    story = models.CharField('用例名称', max_length=50, null=True)
+    title = models.CharField('用例标题', max_length=50, null=True)
+    link = models.CharField('用例链接', max_length=200, null=True)
+    issue = models.CharField('缺陷链接', max_length=200, null=True)
+    url = models.CharField('测试地址', max_length=200, null=True)
+    REQUEST_METHOD = (('0', 'get'), ('1', 'post'), ('2', 'put'), ('3', 'delete'), ('4', 'patch'))
+    method = models.CharField(verbose_name='请求方法', choices=REQUEST_METHOD, default='0', max_length=200)
+    headers = models.CharField('请求头', max_length=200, null=True)
+    requestbody = models.CharField('请求体', max_length=5000, null=True)
+    enable = models.BooleanField('是否启用', default='1')
+    exceptresponse = models.CharField('期望响应', max_length=200, null=True)
+    actualresponse = models.CharField('实际响应', max_length=5000, null=True)
+    result = models.CharField('测试结果', max_length=20, null=True)
+    tester = models.CharField('测试人', max_length=20, null=True)
     create_time = models.DateTimeField('创建时间', auto_now=True)
     class Meta:
         verbose_name = '单一场景接口'
         verbose_name_plural = '单一场景接口'
 
     def __str__(self):
-        return self.apiname
+        return self.story

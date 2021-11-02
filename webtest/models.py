@@ -36,6 +36,6 @@ class Webcasestep(models.Model):
     create_time = models.DateTimeField('创建时间', auto_now=True)
 
     def __str__(self):
-        return self. webcasename
+        return self.webcasename
 
 
