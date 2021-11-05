@@ -12,7 +12,6 @@ class ApisAdmin(admin.TabularInline):
 class ProductAdmin(admin.ModelAdmin):
 
     list_display = ['productname', 'productdesc', 'producter', 'create_time', 'id']
-    inlines = [ApisAdmin]
 
 admin.site.register(Product)
 

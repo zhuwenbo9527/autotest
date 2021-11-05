@@ -11,12 +11,11 @@ class Bug(models.Model):
     buglevel = models.CharField(verbose_name="严重程度", choices=BUG_LEVEL, default='3', max_length=200, null=True)
     bugcreater = models.CharField('创建人', max_length=200)
     bugassign = models.CharField('分配给', max_length=200)
-    create_time = models.DateTimeField('创建时间',auto_now=True)
+    create_time = models.DateTimeField('创建时间', auto_now=True)
 
     class Meta:
         verbose_name = 'bug管理'
         verbose_name_plural = 'bug管理'
-
     def __str__(self):
         return self.bugname
 # Create your models here.

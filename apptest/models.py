@@ -12,8 +12,8 @@ class Appcase(models.Model):
     class Meta:
         verbose_name = 'app测试用例'
         verbose_name_plural = 'app测试用例'
-        def __str__(self):
-            return self.appcasename
+    def __str__(self):
+        return self.appcasename
 
 class Appcasestep(models.Model):
 
