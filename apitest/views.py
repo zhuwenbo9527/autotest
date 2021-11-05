@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseRedirect #加入引用,
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth
-from apitest.models import Apitest,Apistep,Apis
+from apitest.models import Apitest,Apistep,Apis,Users
 from django.contrib.auth import authenticate, login
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import pymysql
@@ -22,7 +22,7 @@ def login(request):
         password = request.POST.get('password')
         user = auth.authenticate(username = username,password = password)
         if user is not None and user.is_active:
-            auth.login(request,user)
+            auth.login(request, user)
             request.session['user'] = username
             response = HttpResponseRedirect('/home/')
             return response
@@ -60,6 +60,12 @@ def apis_manage(request):
     username = request.session.get('user', '')
     apis_list = Apis.objects.all()
     return render(request, "apis_manage.html", {'user': username, "apis": apis_list})
+
+@login_required
+def users_manage(request):
+    username = request.session.get('user', '')
+    users_list = Users.objects.all()
+    return render(request, "users_manage.html", {'user': username, "apis": users_list})
 
 
 @login_required

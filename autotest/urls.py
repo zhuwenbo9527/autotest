@@ -26,7 +26,6 @@ from webtest import webviews
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-
     #views
     path('test/', views.test),
     path('login/', views.login),
@@ -38,6 +37,7 @@ urlpatterns = [
     path('left/', views.left),
     path('apisearch/', views.apisearch),
     path('apistepsearch/', views.apistepsearch),
+    path('users_manage/', views.users_manage),
 
 
     # proviews  产品管理

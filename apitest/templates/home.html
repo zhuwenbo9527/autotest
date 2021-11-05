@@ -1,16 +1,20 @@
 <!DOCTYPE html PUBLIC "-//w3c//DTD HTML 4.01 Framesert//EN"
-        "http://www.w3.org/TR/html4/frameset.dtd">
+        "http://www.w3.org/TR/html4/frameset.dhd">
 <html lang="cn">
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <head>
     <title>自动化测试平台</title>
 </head>
 <frameset id ="framel" rows="*" cols="265,*" framespacing="0" frameborder="yes" border="0">
-    <frame src="../left" name="leftFrame" scrolling="auto" noresize>
-    <frame src="../apitest_manage" name="mainFrame" scrolling="No" noresize>
+    <frame src="/left" name="leftFrame" scrolling="auto" noresize>
+    <frame src="/apitest_manage" name="mainFrame" scrolling="No" noresize>
 </frameset>
 <noframes>
     <body>
+    <ul class="nav navbar-nav navbar-right">
+        <li> 欢迎您,<a href="#">{{ user }}</a></li>
+        <li> <a href="/logout/">退出</a></li>
+    </ul>
     </body>
 </noframes>
 </html>
