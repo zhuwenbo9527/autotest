@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import auth
 from apitest.models import Apitest,Apistep,Apis,Users
 from django.contrib.auth import authenticate, login
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger, InvalidPage
 from django.views.decorators.clickjacking import xframe_options_sameorigin
 import pymysql
 
@@ -60,13 +60,22 @@ def apistep_manage(request):
 def apis_manage(request):
     username = request.session.get('user', '')
     apis_list = Apis.objects.all()
+    paginator = Paginator(apis_list, 20)
+    page = request.GET.get('page', 1)
+    currentPage=int(page)
+    try:
+        apis_list = paginator.page(page)
+    except PageNotAnInteger:
+        apis_list = paginator.page(1)
+    except EmptyPage:
+        apis_list = paginator.page(paginator.num_pages)
     return render(request, "apis_manage.html", {'user': username, "apis": apis_list})
 
 @login_required
 def users_manage(request):
     username = request.session.get('user', '')
     users_list = Users.objects.all()
-    return render(request, "users_manage.html", {'user': username, "apis": users_list})
+    return render(request, "users_manage.html", {'user': username, "users": users_list})
 
 
 @login_required

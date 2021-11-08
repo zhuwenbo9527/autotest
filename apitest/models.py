@@ -21,21 +21,22 @@ class Apitest(models.Model):
 
 
 class Apistep(models.Model):
+
     Apitest = models.ForeignKey(Apitest, on_delete=models.CASCADE)
-    #关联接口ID
+    # 关联接口ID
     id = models.BigAutoField(primary_key=True)
     waittime = models.CharField('前置等待时间', max_length=100, blank=True)
-    #前置等待时间
+    # 前置等待时间
     title = models.CharField('用例标题', max_length=200)
-    #用例标题
+    # 用例标题
     url = models.CharField('路径', max_length=150 )
     headers = models.CharField('请求头', max_length=100, blank=True)
-    #用例路径
+    # 用例路径
     REQUEST_METHOD = (('get', 'get'), ('post', 'post'), ('put', 'put'), ('delete', 'delete'), ('patch', 'patch'))
     apimethod = models.CharField(verbose_name='请求方法', choices=REQUEST_METHOD, default='get', max_length=200, null=True)
     # 请求方法
     apiparamvalue = models.CharField('请求参数和值', max_length=5000, blank=True)
-    #参数和值
+    # 参数和值
     exceptresponse = models.CharField('期望响应', max_length=200, blank=False)
     actualresponse = models.CharField('实际响应', max_length=5000, default='null', blank=True)
     result = models.CharField('测试结果', max_length=20, null=False, blank=True)
