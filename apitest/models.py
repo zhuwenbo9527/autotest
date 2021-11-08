@@ -56,7 +56,7 @@ class Apis(models.Model):
     title = models.CharField('用例标题', max_length=50, blank=False)
     link = models.CharField('用例链接', max_length=200, blank=True)
     issue = models.CharField('缺陷链接', max_length=200, blank=True)
-    url = models.CharField('url地址', max_length=200, blank=False)
+    url = models.CharField('url地址', max_length=500, blank=False)
     REQUEST_METHOD = (('0', 'get'), ('1', 'post'), ('2', 'put'), ('3', 'delete'), ('4', 'patch'))
     method = models.CharField(verbose_name='请求方法', choices=REQUEST_METHOD, default='0', max_length=200)
     headers = models.CharField('请求头', max_length=200, blank=True)

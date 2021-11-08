@@ -5,6 +5,7 @@ from django.contrib import auth
 from apitest.models import Apitest,Apistep,Apis,Users
 from django.contrib.auth import authenticate, login
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.views.decorators.clickjacking import xframe_options_sameorigin
 import pymysql
 
 
@@ -69,20 +70,28 @@ def users_manage(request):
 
 
 @login_required
-def apisearch(request):
+def apissearch(request):
     username = request.session.get('user', '')
-    search_apitestname = request.GET.get("apitestname", "")
-    apitest_list = Apitest.objects.filter(apitestname__icontains=search_apitestname)
+    search_feature = request.GET.get("feature", "")
+    apis_list = Apis.objects.filter(feature__contains=search_feature)
+    return render(request, 'apis_manage.html', {"user": username, "apis": apis_list})
+
+@login_required
+def apitestsearch(request):
+    username = request.session.get('user', '')
+    search_apitestfeature = request.GET.get("apitestfeature", "")
+    apitest_list = Apitest.objects.filter(apitestfeature__contains=search_apitestfeature)
     return render(request, 'apitest_manage.html', {"user": username, "apitests": apitest_list})
 
 @login_required
 def apistepsearch(request):
     username = request.session.get('user', '')
-    search_apitestname = request.GET.get("apitestname", "")
-    apitestname_list = Apitest.objects.filter(apitestname__icontains=search_apitestname)
-    return render(request, 'apistep_manage.html', {"user": username, "apisteps": apitestname_list})
+    search_title = request.GET.get("title", "")
+    apistep_list = Apistep.objects.filter(title__contains=search_title)
+    return render(request, "apistep_manage.html", {"user": username, "apisteps": apistep_list})
 
 
+@xframe_options_sameorigin
 def left(request):
     return render(request, "left.html")
 # Create your views here.

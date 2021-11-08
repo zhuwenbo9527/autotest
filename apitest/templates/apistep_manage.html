@@ -13,20 +13,10 @@
     <div class = "container">
             <a class = "navbar-brand" href="#">&nbsp;</a>
             <ul class = "nav justify-content-center">
-                <li><a href="/apitest_manage/">流程接口测试用例</a></li>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <li class = "active"><a style="color:white" href="/apistep_manage/">流程接口测试步骤</a></li>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <li class = "active"><a style="color:white" href="/apis_manage/">单一接口测试用例</a></li>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <li class = "active"><a style="color:white" href="/users_manage/">用例用户管理</a></li>
             </ul>
             <u1 class="nav justify-content-end">
-                <li><a href="#">{{ user }}</a></li>
-                <li><a href="/logout/">退出</a></li>
+                <li ><a style="color:white" href="../admin/">欢迎您,{{ user }}  &nbsp;&nbsp;</a></li>
+                <li><a style="color:white" href="/logout/">退出</a></li>
             </u1>
     </div>
 </nav>
@@ -34,7 +24,7 @@
 <div class="page-header" style="padding-top:70px;">
     <form class="navbar-form" method="get" action="/apistepsearch/">
         {% csrf_token %}
-        <input type="search" name="apitestname" placeholder="名称" required>
+        <input type="search" name="title" placeholder="测试用例名称" required>
         <button type="submit">搜索</button>
     </form>
 </div>
@@ -44,19 +34,33 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>id</th><th>接口名称</th> <th>接口地址</th> <th>参数值</th> <th>方法</th>
-                <th>预期结果</th> <th>测试结果</th> <th>执行时间</th>
+                <th>id</th>
+                <th>流程id</th>
+                <th>测试用例名称</th>
+                <th>前置等待时间</th>
+                <th>请求地址</th>
+                <th>请求用户</th>
+                <th>请求方法</th>
+                <th>请求参数</th>
+                <th>预期响应</th>
+                <th>实际响应</th>
+                <th>测试结果</th>
+                <th>创建时间</th>
             </tr>
             </thead>
             <tbody>
             {% for apistep in apisteps %}
             <tr>
                 <td>{{ apistep.id }}</td>
-                <td>{{ apistep.apiname }}</td>
-                <td>{{ apistep.apiurl }}</td>
-                <td>{{ apistep.apiparamvalue }}</td>
+                <td>{{ apistep.Apitest_id }}</td>
+                <td>{{ apistep.title }}</td>
+                <td>{{ apistep.waittime }}</td>
+                <td>{{ apistep.url }}</td>
+                <td>{{ apistep.headers }}</td>
                 <td>{{ apistep.apimethod }}</td>
-                <td>{{ apistep.apiresult }}</td>
+                <td>{{ apistep.apiparamvalue }}</td>
+                <td>{{ apistep.exceptresponse }}</td>
+                <td>{{ apistep.acutalresponse }}</td>
                 <td>{% if apistep.apistatus == 1 %}
                 <a style="color:green">{{ apistep.stauts }}</a>
                 {% else %}

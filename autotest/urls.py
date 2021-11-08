@@ -35,7 +35,8 @@ urlpatterns = [
     path('apistep_manage/', views.apistep_manage),
     path('apis_manage/', views.apis_manage),
     path('left/', views.left),
-    path('apisearch/', views.apisearch),
+    path('apissearch/', views.apissearch),
+    path('apitestsearch/', views.apitestsearch),
     path('apistepsearch/', views.apistepsearch),
     path('users_manage/', views.users_manage),
 

@@ -5,7 +5,7 @@
     {% load bootstrap4 %}
     {% bootstrap_css %}
     {% bootstrap_javascript %}
-    <title>自动化平台测试</title>
+    <title>自动化测试平台</title>
 </head>
 <body role="document">
 <!--导航栏-->
@@ -13,13 +13,6 @@
     <div class = "container">
             <a class = "navbar-brand" href="#">&nbsp; </a>
             <ul class = "nav justify-content-center">
-                <li><a style="color:white" href="/apitest_manage/">流程接口测试用例</a></li>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <li class = "active"><a style="color:white" href="/apistep_manage/">流程接口测试步骤</a></li>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <li class = "active"><a style="color:white" href="/apis_manage/">单一接口测试用例</a></li>
             </ul>
             <u1 class="nav justify-content-end">
                 <li ><a style="color:white" href="../admin/">欢迎您,{{ user }}  &nbsp;&nbsp;</a></li>
@@ -29,9 +22,9 @@
 </nav>
 <!--搜索栏-->
 <div class="page-header" style="padding-top:70px;">
-    <form class="navbar-form" method="get" action="/apisearch/">
+    <form class="navbar-form" method="get" action="/apitestsearch/">
         {% csrf_token %}
-        <input type="search" name="apitestname" placeholder="名称" required>
+        <input type="search" name="apitestfeature" placeholder="所属模块" required>
         <button type="submit">搜索</button>
     </form>
 </div>
@@ -42,18 +35,22 @@
             <thead>
             <tr>
                 <th>ID</th>
-                <th>业务接口流程名称</th>
-                <th>执行人</th>
-                <th>结果</th>
+                <th>所属模块</th>
+                <th>业务流程名称</th>
+                <th>测试人</th>
+                <th>测试结果</th>
+                <th>创建时间</th>
             </tr>
             </thead>
             <tbody>
             {% for apitest in apitests %}
             <tr>
                 <td>{{ apitest.id }}</td>
-                <td>{{ apitest.apitestname}}</td>
-                <td>{{ apitest.apitester }}</td>
-                <td>{{ apitest.apitestresult }}</td>
+                <td>{{ apitest.apitestfeature}}</td>
+                <td>{{ apitest.apiteststory}}</td>
+                <td>{{ apitest.apitester}}</td>
+                <td>{{ apitest.apitestresult}}</td>
+                <td>{{ apitest.create_time}}</td>
             </tr>
             {% endfor %}
             </tbody>
