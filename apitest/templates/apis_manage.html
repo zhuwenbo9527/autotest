@@ -6,6 +6,7 @@
     {% bootstrap_css %}
     {% bootstrap_javascript %}
     <title>自动化测试平台</title>
+
     <style>
 table tbody {
     display:inline-block;
@@ -13,6 +14,7 @@ table tbody {
     overflow-y:auto;
     -ms-overflow-x:auto;
     border: 1px;
+    font-size: 10px;
 
 }
 
@@ -22,8 +24,7 @@ table thead, tbody tr {
     table-layout:fixed;
 }
 
-td {overflow: auto;}
-
+td {overflow: auto;height: auto}
 
 </style>
 
@@ -50,132 +51,105 @@ td {overflow: auto;}
     </form>
 </div>
 <!--翻页功能-->
-<span style="position:absolute; right:100px; bottom:30px;">
-<div class = "container">
-    <ul class="pagination" id="paper">
-        <a>总共{{ apis.paginator.count }}条</a>
-        {# 上一页链接开始 #}
-        {% if apis.has_previous %}
-        {# 如果有上一页，则正常显示上一页链接 #}
-        <li class="previous">
-            <a href="/apis_manage/?page={{ apis.previous_page_number }}">上一页</a>
-        </li>
-        {% else %}
-        <li class="previous disabled">
-            <a href="#">上一页</a>
-        </li>
-        {# 如果当前不存在上一页，则上一页的链接不可单击 #}
-        {% endif %}
-        {# 上一页链接结束 #}
-        {% if apis.paginator.page_num <= 10 %}
-            {% for num in apis.paginator.page_range %}
-                {% if num == currentPage %}
-                    <li class="item active">
-                        <a href="/apis_manage/?page={{ num }}">{{ num }}</a>
-                    </li>
-                {% else %}
-                    <li class="item">
-                        <a href="/apis_manage/?page={{ num }}">{{ num }}</a>
-                    </li>
-                {% endif %}
-            {% endfor %}
-        {% else %}
-            {% if apis.number < 6 %}
-                {% for num in apis.paginator.page_range %}
-                    {% if  num < 6 %}
-                        {% if num == currentPage %}
-                            <li class="item active">
-                                <a href="/apis_manage/?page={{ num }}">{{ num }}&nbsp;</a>
-                            </li>
-                        {% else %}
-                            <li class="item">
-                                <a href="/apis_manage/?page={{ num }}">{{ num }}&nbsp;</a>
-                            </li>
-                        {% endif %}
-                    {% endif %}
-                {% endfor %}
-                <a>...</a>
-            <li class="item">
-                <a href="/apis_manage/?page={{ apis.paginator.num_pages }}">{{ apis.paginator.num_pages }}</a>
+<nav>
+    <span style = "position: absolute;right:100px;bottom: 30px">
+    <ul class="pagination justify-content-center">
+            <li class="page-item">
+                <a class="page-link" href="/apis_manage/?page={{ apis_account }}">共{{ apis_account }}条</a>
             </li>
-            {% endif %}
-            {% if apis.number >= 6 and  apis.number|add:4 < apis.paginator.num_pages %}
-                <li class="item">
-                    <a href="/apis_manage/?page={{ 1 }}">1</a>
-                </li>
-                <a>...</a>
-                <li class="item">
-                    <a href="/apis_manage/?page={{ apis.number|add:-2 }}">{{ apis.number|add:-2 }}&nbsp;</a>
-                    <a href="/apis_manage/?page={{ apis.number|add:-1 }}">{{ apis.number|add:-1 }}&nbsp;</a>
-                </li>
-                <li class="item active">
-                    <a href="/apis_manage/?page={{ apis.number }}">{{ apis.number }}&nbsp;</a>
-                </li>
-                <li class="item">
-                    <a href="/apis_manage/?page={{ apis.number|add:1 }}">{{ apis.number|add:1 }}&nbsp;</a>
-                    <a href="/apis_manage/?page={{ apis.number|add:2 }}">{{ apis.number|add:2 }}&nbsp;</a>
-                </li>
-                <a>...</a>
-                <li class="item">
-                <a href="/apis_manage/?page={{ apis.paginator.num_pages }}">{{ apis.paginator.num_pages }}</a>
-                </li>
-            {% endif %}
-            {% if apis.number|add:5 > apis.paginator.num_pages %}
-                <a href="/apis_manage/?page={{ 1 }}">1</a>
-                <a>...</a>
-                <a href="/apis_manage/?page={{ apis.paginator.num_pages|add:-3 }}">{{ apis.paginator.num_pages|add:-3 }}&nbsp;</a>
-                <a href="/apis_manage/?page={{ apis.paginator.num_pages|add:-2 }}">{{ apis.paginator.num_pages|add:-2 }}&nbsp;</a>
-                <a href="/apis_manage/?page={{ apis.paginator.num_pages|add:-1 }}">{{ apis.paginator.num_pages|add:-1 }}&nbsp;</a>
-                <a href="/apis_manage/?page={{ apis.paginator.num_pages }}">{{ apis.paginator.num_pages }}&nbsp;</a>
-            {% endif %}
+        {% if apis.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="/apis_manage/?page={{ apis.previous_page_number }}">&laquo;</a>
+            </li>
         {% endif %}
-        {# 下一页链接开始 #}
-        {% if apis.has_next %}
-        {# 如果有上一页，则正常显示上一页链接 #}
-        <li class="next">
-            <a href="/apis_manage/?page={{ apis.next_page_number }}">下一页</a>
-        </li>
-        {% else %}
-        <li class="next disabled">
-            <a href="#">下一页</a>
-        </li>
-        {% endif %}
-        {# 下一页链接结束 #}
 
+        {% if left_has_more %}
+            <li class="page-item">
+                <a class="page-link" href="/apis_manage/?page=1">1</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="javascript: void(0);">...</a>
+            </li>
+        {% endif %}
+
+        {% for page in left_page_range %}
+            <li class="page-item">
+                <a class="page-link" href="/apis_manage/?page={{ page }}">{{ page }}</a>
+            </li>
+        {% endfor %}
+
+        <li class="page-item active">
+            <a class="page-link" href="javascript: void(0);">{{ apis.number }}</a>
+        </li>
+
+        {% for page in right_page_range %}
+            <li class="page-item">
+                <a class="page-link" href="/apis_manage/?page={{ page }}">{{ page }}</a>
+            </li>
+        {% endfor %}
+
+        {% if right_has_more %}
+            <li class="page-item">
+                <a class="page-link" href="javascript: void(0);">...</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="/apis_manage/?page={{ paginator.num_pages }}">{{ paginator.num_pages }}</a>
+            </li>
+        {% endif %}
+
+        {% if apis.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="/apis_manage/?page={{ apis.next_page_number }}">&raquo;</a>
+            </li>
+        {% endif %}
     </ul>
-</div>
-</span>
+    </span>
+</nav>
 <!--单一接口测试用例-->
 <div class="row" style = "padding-top: 20px;padding-left: 20px" >
     <div class="col-md-ll" >
         <table class="table table-striped" border="0.5" width="100%" >
         <thead>
             <tr>
-                <th class = "table-3">ID</th>
-                <th class = "table-2">所属模块</th>
-                <th class = "table-2">用例名称</th>
+                <th>ID</th>
+                <th>所属模块</th>
+                <th>用例名称</th>
                 <th>用例标题</th>
                 <th>用例方法</th>
                 <th>接口路径</th>
-                <th class = "table-3">是否启用</th>
-                <th class = "table-3">实际结果</th>
+                <th>是否启用</th>
+                <th>实际结果</th>
                 <th>测试负责人</th>
                 <th>创建时间</th>
+                <th>编辑</th>
+                <th>删除</th>
             </tr>
         </thead>
         <tbody>
         {% for api in apis %}
             <tr>
-            <td class = "table-3">{{ api.id }}</td>
-            <td class = "table-2">{{ api.feature }}</td>
-            <td class = "table-2">{{ api.story }}</td>
+            <td>{{ api.id }}</td>
+            <td>{{ api.feature }}</td>
+            <td>{{ api.story }}</td>
             <td>{{ api.title }}</td>
             <td>{{ api.method }}</td>
             <td>{{ api.url }}</td>
-            <td class = "table-3">{{ api.enable }}</td>
-            <td class = "table-3">{{ api.result }}</td>
+            <td>{{ api.enable }}</td>
+            <td>{{ api.result }}</td>
             <td>{{ api.tester }}</td>
             <td>{{ api.create_time }}</td>
+            <td>
+                <a style='color:lightblue' class="related-widget-wrapper-link add-related"
+                       id="add_id_Apis" href="../admin/apitest/apis/{{ api.id  }}/change/">
+                    <img src="/static/admin/img/icon-changelink.svg">
+                </a>
+            </td>
+            <td>
+                <a style='color:red' class="related-widget-wrapper-link add-related"
+                       id="add_id_Apis" href="../admin/apitest/apis/{{ api.id  }}/delete/">
+                    <img src="/static/admin/img/icon-deletelink.svg">
+                </a>
+            </td>
             </tr>
         {% endfor %}
         </tbody>

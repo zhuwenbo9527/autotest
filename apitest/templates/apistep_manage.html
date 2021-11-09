@@ -5,7 +5,28 @@
     {% load bootstrap4 %}
     {% bootstrap_css %}
     {% bootstrap_javascript %}
-    <title>自动化平台测试</title>
+    <title>自动化测试平台</title>
+    <style>
+table tbody {
+    display:inline-block;
+    height:480px;
+    overflow-y:auto;
+    -ms-overflow-x:auto;
+    border: 1px;
+    font-size: 10px;
+
+}
+
+table thead, tbody tr {
+    display:table;
+    width:100%;
+    table-layout:fixed;
+    font-size: 10px;
+}
+
+td {overflow: auto;height: auto}
+
+</style>
 </head>
 <body role="document">
 <!--导航栏-->
@@ -28,10 +49,65 @@
         <button type="submit">搜索</button>
     </form>
 </div>
+<!--翻页功能-->
+<nav>
+    <span style = "position: absolute;right:100px;bottom: 30px">
+    <ul class="pagination justify-content-center">
+            <li class="page-item">
+                <a class="page-link" href="/apistep_manage/?page={{ apisteps_count }}">共{{ apisteps_count }}条</a>
+            </li>
+        {% if apisteps.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="/apistep_manage/?page={{ apisteps.previous_page_number }}">&laquo;</a>
+            </li>
+        {% endif %}
+
+        {% if left_has_more %}
+            <li class="page-item">
+                <a class="page-link" href="/apistep_manage/?page=1">1</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="javascript: void(0);">...</a>
+            </li>
+        {% endif %}
+
+        {% for page in left_page_range %}
+            <li class="page-item">
+                <a class="page-link" href="/apistep_manage/?page={{ page }}">{{ page }}</a>
+            </li>
+        {% endfor %}
+
+        <li class="page-item active">
+            <a class="page-link" href="javascript: void(0);">{{ apisteps.number }}</a>
+        </li>
+
+        {% for page in right_page_range %}
+            <li class="page-item">
+                <a class="page-link" href="/apistep_manage/?page={{ page }}">{{ page }}</a>
+            </li>
+        {% endfor %}
+
+        {% if right_has_more %}
+            <li class="page-item">
+                <a class="page-link" href="javascript: void(0);">...</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="/apistep_manage/?page={{ paginator.num_pages }}">{{ paginator.num_pages }}</a>
+            </li>
+        {% endif %}
+
+        {% if apisteps.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="/apistep_manage/?page={{ apisteps.next_page_number }}">&raquo;</a>
+            </li>
+        {% endif %}
+    </ul>
+    </span>
+</nav>
 <!--流程接口测试步骤-->
-<div class="row" style="padding-top: 70px">
-    <div class="col-md-11">
-        <table class="table table-striped">
+<div class="row" style = "padding-top: 20px;padding-left: 20px" >
+    <div class="col-md-ll" >
+        <table class="table table-striped" border="0" width="100%" >
             <thead>
             <tr>
                 <th>id</th>
@@ -41,11 +117,12 @@
                 <th>请求地址</th>
                 <th>请求用户</th>
                 <th>请求方法</th>
-                <th>请求参数</th>
                 <th>预期响应</th>
                 <th>实际响应</th>
                 <th>测试结果</th>
                 <th>创建时间</th>
+                <th>编辑</th>
+                <th>删除</th>
             </tr>
             </thead>
             <tbody>
@@ -58,7 +135,6 @@
                 <td>{{ apistep.url }}</td>
                 <td>{{ apistep.headers }}</td>
                 <td>{{ apistep.apimethod }}</td>
-                <td>{{ apistep.apiparamvalue }}</td>
                 <td>{{ apistep.exceptresponse }}</td>
                 <td>{{ apistep.acutalresponse }}</td>
                 <td>{% if apistep.apistatus == 1 %}
@@ -68,6 +144,18 @@
                 {% endif %}
                 </td>
                 <td>{{ apistep.create_time }}</td>
+                <td>
+                    <a style='color:lightblue' class="related-widget-wrapper-link add-related"
+                       id="add_id_Apistep" href="../admin/apitest/apitest/{{ apistep.Apitest_id  }}/change/">
+                        <img src="/static/admin/img/icon-changelink.svg">
+                    </a>
+                </td>
+                <td>
+                    <a style='color:lightblue' class="related-widget-wrapper-link add-related"
+                       id="add_id_Apistep" href="../admin/apitest/apitest/{{ apistep.Apitest_id }}/delete/">
+                        <img src="/static/admin/img/icon-deletelink.svg">
+                    </a>
+                </td>
             </tr>
             {% endfor %}
             </tbody>

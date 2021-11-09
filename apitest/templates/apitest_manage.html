@@ -6,6 +6,26 @@
     {% bootstrap_css %}
     {% bootstrap_javascript %}
     <title>自动化测试平台</title>
+    <style>
+table tbody {
+    display:inline-block;
+    height:480px;
+    overflow-y:auto;
+    -ms-overflow-x:auto;
+    border: 1px;
+    font-size: 10px;
+
+}
+
+table thead, tbody tr {
+    display:table;
+    width:100%;
+    table-layout:fixed;
+}
+
+td {overflow: auto;height: auto}
+
+</style>
 </head>
 <body role="document">
 <!--导航栏-->
@@ -20,6 +40,61 @@
             </u1>
     </div>
 </nav>
+<!--翻页功能-->
+<nav>
+    <span style = "position: absolute;right:100px;bottom: 30px">
+    <ul class="pagination justify-content-center">
+            <li class="page-item">
+                <a class="page-link" href="/apitest_manage/?page={{ apitests_count }}">共{{ apitests_count }}条</a>
+            </li>
+        {% if apitests.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="/apitest_manage/?page={{ apitests.previous_page_number }}">&laquo;</a>
+            </li>
+        {% endif %}
+
+        {% if left_has_more %}
+            <li class="page-item">
+                <a class="page-link" href="/apitest_manage/?page=1">1</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="javascript: void(0);">...</a>
+            </li>
+        {% endif %}
+
+        {% for page in left_page_range %}
+            <li class="page-item">
+                <a class="page-link" href="/apitest_manage/?page={{ page }}">{{ page }}</a>
+            </li>
+        {% endfor %}
+
+        <li class="page-item active">
+            <a class="page-link" href="javascript: void(0);">{{ apitests.number }}</a>
+        </li>
+
+        {% for page in right_page_range %}
+            <li class="page-item">
+                <a class="page-link" href="/apitest_manage/?page={{ page }}">{{ page }}</a>
+            </li>
+        {% endfor %}
+
+        {% if right_has_more %}
+            <li class="page-item">
+                <a class="page-link" href="javascript: void(0);">...</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="/apitest_manage/?page={{ paginator.num_pages }}">{{ paginator.num_pages }}</a>
+            </li>
+        {% endif %}
+
+        {% if apitests.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="/apitest_manage/?page={{ apitests.next_page_number }}">&raquo;</a>
+            </li>
+        {% endif %}
+    </ul>
+    </span>
+</nav>
 <!--搜索栏-->
 <div class="page-header" style="padding-top:70px;">
     <form class="navbar-form" method="get" action="/apitestsearch/">
@@ -29,9 +104,9 @@
     </form>
 </div>
 <!--流程接口列表-->
-<div class ="row" style = "padding-top:70px;">
-    <div class="col-md-11">
-        <table class="table table-striped">
+<div class="row" style = "padding-top: 20px;padding-left: 20px" >
+    <div class="col-md-ll" >
+        <table class="table table-striped" border="0" width="90%" >
             <thead>
             <tr>
                 <th>ID</th>
@@ -40,6 +115,8 @@
                 <th>测试人</th>
                 <th>测试结果</th>
                 <th>创建时间</th>
+                <th>编辑</th>
+                <th>删除</th>
             </tr>
             </thead>
             <tbody>
@@ -51,6 +128,18 @@
                 <td>{{ apitest.apitester}}</td>
                 <td>{{ apitest.apitestresult}}</td>
                 <td>{{ apitest.create_time}}</td>
+                <td>
+                    <a style='color:lightblue' class="related-widget-wrapper-link add-related"
+                       id="update_id_Apitest" href="../admin/apitest/apitest/{{ apitest.id  }}/change/">
+                        <img src="/static/admin/img/icon-changelink.svg">
+                    </a>
+                </td>
+                <td>
+                    <a style='color:lightblue' class="related-widget-wrapper-link add-related"
+                       id="delete_id_Apitest" href="../admin/apitest/apitest/{{ apitest.id  }}/delete/">
+                        <img src="/static/admin/img/icon-deletelink.svg">
+                    </a>
+                </td>
             </tr>
             {% endfor %}
             </tbody>
