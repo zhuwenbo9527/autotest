@@ -40,9 +40,11 @@ def logout(request):
 
 #接口管理
 @login_required
-def apitest_manage(request):
-    # 读取所有流程接口数据
-    apitests_list = Apitest.objects.all()
+def apitest_manage(request, apitests_list=None):
+    if apitests_list:
+        apitests_list = apitests_list
+    else:
+        apitests_list = Apitest.objects.all()
     apitests_count = apitests_list.count()
     # 浏览器登录session 
     username = request.session.get('user', '')
@@ -57,10 +59,13 @@ def apitest_manage(request):
 
 #接口步骤管理
 @login_required
-def apistep_manage(request):
+def apistep_manage(request,apisteps_list = None):
+    if apisteps_list:
+        apisteps_list=apisteps_list
+    else:
+        apisteps_list = Apistep.objects.all()
     # 浏览器登录session
     username = request.session.get('user', '')
-    apisteps_list = Apistep.objects.all()
     apisteps_count = apisteps_list.count()
     apisteps_list, left_has_more, right_has_more, left_page_range, right_page_range, paginator = getpagemessage(request,
                                                                                                     apisteps_list)
@@ -68,7 +73,7 @@ def apistep_manage(request):
     return render(request, "apistep_manage.html",
                   {'user': username, "apisteps": apisteps_list, "left_has_more": left_has_more,
                    "right_has_more": right_has_more, "left_page_range": left_page_range,
-                   "right_page_range": right_page_range, "paginator": paginator,"apisteps_count":apisteps_count})
+                   "right_page_range": right_page_range, "paginator": paginator, "apisteps_count": apisteps_count})
 
 
 def getpagemessage(request, message_list):
@@ -126,15 +131,15 @@ def apissearch(request):
 def apitestsearch(request):
     username = request.session.get('user', '')
     search_apitestfeature = request.GET.get("apitestfeature", "")
-    apitest_list = Apitest.objects.filter(apitestfeature__contains=search_apitestfeature)
-    return render(request, 'apitest_manage.html', {"user": username, "apitests": apitest_list})
+    apitests_list = Apitest.objects.filter(apitestfeature__contains=search_apitestfeature)
+    return apitest_manage(request, apitests_list=apitests_list)
 
 @login_required
 def apistepsearch(request):
     username = request.session.get('user', '')
     search_title = request.GET.get("title", "")
-    apistep_list = Apistep.objects.filter(title__contains=search_title)
-    return render(request, "apistep_manage.html", {"user": username, "apistep_list": apistep_list})
+    apisteps_list = Apistep.objects.filter(title__contains=search_title)
+    return apistep_manage(request, apisteps_list=apisteps_list)
 
 
 @xframe_options_sameorigin
@@ -209,3 +214,12 @@ def apis_delete_submit(request):
         id = request.POST.get("id")
         Apis.objects.filter(id=id).update(isdelete = 1)
     return apis_manage(request, message="删除成功")
+
+def apitest_add(request):
+
+    apitests_list = Apitest.objects.all()
+    return render(request, "apitest_add.html")
+
+def apitest_add_submit(request):
+
+    pass
