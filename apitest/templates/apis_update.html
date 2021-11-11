@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+
+<html lang="zh-hans" dir="ltr">
+<head>
+<title>配货通知单 | 修改 单一场景接口 | Django 站点管理员</title>
+<link rel="stylesheet" type="text/css" href="/static/admin/css/base.css">
+
+  <link rel="stylesheet" type="text/css" href="/static/admin/css/nav_sidebar.css">
+  <script src="/static/admin/js/nav_sidebar.js" defer></script>
+
+<link rel="stylesheet" type="text/css" href="/static/admin/css/forms.css">
+
+
+<script src="/admin/jsi18n/"></script>
+<script src="/static/admin/js/vendor/jquery/jquery.js"></script>
+<script src="/static/admin/js/jquery.init.js"></script>
+<script src="/static/admin/js/core.js"></script>
+<script src="/static/admin/js/admin/RelatedObjectLookups.js"></script>
+<script src="/static/admin/js/actions.js"></script>
+<script src="/static/admin/js/urlify.js"></script>
+<script src="/static/admin/js/prepopulate.js"></script>
+<script src="/static/admin/js/vendor/xregexp/xregexp.js"></script>
+
+
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/responsive.css">
+    <style>
+        .vTextField{
+            width:800px;
+        }
+        #id_apiparamvalue{
+            rows:"10";
+            cols:"30";
+            width:800px;
+            height:500px;
+            overflow-y: auto;
+        }</style>
+
+<meta name="robots" content="NONE,NOARCHIVE">
+</head>
+<body class=" app-apitest model-apis change-form"
+  data-admin-utc-offset="28800">
+<!-- Container -->
+<div id="container">
+      <div class="content">
+        <!-- Content -->
+        <div id="content" class="colM" style="height:600px;overflow:auto;">
+          <h1>修改 单一场景接口</h1>
+          <h2>配货通知单</h2>
+          <div id="content-main">
+  <ul class="object-tools">
+<li>
+    <a href="/admin/apitest/apis/289/history/" class="historylink">历史</a>
+</li>
+  </ul>
+<form method="post" id="apis_form" action="/apis_manage/update/submit/">
+    {% csrf_token %}
+<div>
+  <fieldset class="module aligned ">
+        <div class="form-row field-Product">
+                <div>
+                        <label for="id_Product">Product:</label>
+                            <div class="related-widget-wrapper">
+    <select name="Product" id="id_Product">
+  <option value="">---------</option>
+  <option value="1" selected>高保真环境ERP后台</option>
+</select>
+        <a class="related-widget-wrapper-link change-related" id="change_id_Product"
+            data-href-template="/admin/product/product/__fk__/change/?_to_field=id&amp;_popup=1"
+            title="更改选中的产品管理"><img src="/static/admin/img/icon-changelink.svg" alt="修改"></a><a class="related-widget-wrapper-link add-related" id="add_id_Product"
+            href="/admin/product/product/add/?_to_field=id&amp;_popup=1"
+            title="增加另一个 产品管理"><img src="/static/admin/img/icon-addlink.svg" alt="增加"></a>
+</div>
+                </div>
+        </div>
+        <div class="form-row field-feature" hidden="hidden" >
+                <div>
+                        <label class="required" for="id_feature">id:</label>
+                            <input  type="text" name="id" readonly = "true" aria-hidden="true" class="vTextField" maxlength="50" required id="id_id" value="{{ api.id }}">
+                </div>
+        </div>
+        <div class="form-row field-feature">
+                <div>
+                        <label class="required" for="id_feature"><span style="color:red;">* </span>模块名称:</label>
+                            <input type="text" name="feature"  class="vTextField" maxlength="50" required id="id_feature" value="{{ api.feature }}">
+                </div>
+        </div>
+        <div class="form-row field-story">
+                <div>
+                        <label class="required" for="id_story"><span style="color:red;">* </span>用例名称:</label>
+                            <input type="text" name="story" value="{{ api.story }}" class="vTextField" maxlength="50" required id="id_story">
+                </div>
+        </div>
+        <div class="form-row field-title">
+                <div>
+                        <label class="required" for="id_title"><span style="color:red;">* </span>用例标题:</label>
+                            <input type="text" name="title" value="{{ api.title}}" class="vTextField" maxlength="50" required id="id_title">
+                </div>
+        </div>
+        <div class="form-row field-link">
+                <div>
+                        <label for="id_link">用例链接:</label>
+                            <input type="text" name="link" value="{{ api.link }}" class="vTextField" maxlength="200" id="id_link">
+                </div>
+        </div>
+        <div class="form-row field-issue">
+                <div>
+                        <label for="id_issue">缺陷链接:</label>
+                            <input type="text" name="issue" value="{{ api.issue }}" class="vTextField" maxlength="200" id="id_issue">
+                </div>
+        </div>
+        <div class="form-row field-url">
+                <div>
+                        <label class="required" for="id_url"><span style="color:red;">* </span>Url地址:</label>
+                            <input type="text" name="url" value="{{ api.url }}" class="vTextField" maxlength="500" required id="id_url">
+                </div>
+        </div>
+        <div class="form-row field-method">
+                <div>
+                        <label class="required" for="id_method"><span style="color:red;">* </span>请求方法:</label>
+                            <select name="method" id="id_method">
+  <option value="0" selected>get</option>
+  <option value="1">post</option>
+  <option value="2">put</option>
+  <option value="3">delete</option>
+  <option value="4">patch</option>
+</select>
+                </div>
+        </div>
+        <div class="form-row field-headers">
+                <div>
+                        <label for="id_headers">请求头:</label>
+                            <input type="text" name="headers" value="{{ api.headers }}"  class="vTextField" maxlength="200" id="id_headers">
+                </div>
+        </div>
+        <div class="form-row field-apiparamvalue">
+                <div>
+                        <label for="id_apiparamvalue">请求参数和值:</label>
+                    <textarea type="text" name="apiparamvalue" value="{{ api.apiparamvalue }}" class="vTextField" maxlength="5000" id="id_apiparamvalue"></textarea>
+                </div>
+        </div>
+        <div class="form-row field-enable">
+                <div class="checkbox-row">
+                        <input type="checkbox" name="enable" id="id_enable" checked><label class="vCheckboxLabel" for="id_enable">是否启用</label>
+                </div>
+        </div>
+        <div class="form-row field-exceptresponse">
+                <div>
+                        <label class="required" for="id_exceptresponse"><span style="color:red;">* </span>期望响应:</label>
+                            <input type="text" name="exceptresponse" value="{&quot;code&quot;:1,&quot;message&quot;:&quot;操作成功&quot;,&quot;id&quot;:&quot;0385b05d-447b-48e5-a081-7d2eeb282706&quot;}" class="vTextField" maxlength="200" required id="id_exceptresponse">
+                </div>
+        </div>
+        <div class="form-row field-tester">
+                <div>
+                        <label class="required" for="id_tester"><span style="color:red;">* </span>测试人:</label>
+
+                            <input type="text" name="tester" value="{{ api.tester }}" class="vTextField" maxlength="20" required id="id_tester">
+                </div>
+        </div>
+</fieldset>
+<div class="submit-row">
+<input type="submit" value="保存" class="default" name="_save">
+</div>
+    <script id="django-admin-form-add-constants"
+            src="/static/admin/js/change_form.js"
+            async>
+    </script>
+<script id="django-admin-prepopulated-fields-constants"
+        src="/static/admin/js/prepopulate_init.js"
+        data-prepopulated-fields="[]">
+</script>
+</div>
+</form></div>
+          <br class="clear">
+        </div>
+        <!-- END Content -->
+        <div id="footer"></div>
+      </div>
+    </div>
+</div>
+<!-- END Container -->
+</body>
+</html>

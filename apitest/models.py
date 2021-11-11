@@ -67,6 +67,7 @@ class Apis(models.Model):
     actualresponse = models.CharField('实际响应', max_length=5000, default='null', blank=True)
     result = models.CharField('测试结果', max_length=20, blank=True)
     tester = models.CharField('测试人', max_length=20, blank=False)
+    isdelete = models.SmallIntegerField("是否删除")
     create_time = models.DateTimeField('创建时间', auto_now=True)
 
     class Meta:

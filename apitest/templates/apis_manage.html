@@ -14,7 +14,7 @@ table tbody {
     overflow-y:auto;
     -ms-overflow-x:auto;
     border: 1px;
-    font-size: 10px;
+    font-size: 3px;
 
 }
 
@@ -23,7 +23,16 @@ table thead, tbody tr {
     width:100%;
     table-layout:fixed;
 }
-
+a.button_add{
+    background-color: #1890ff;
+    color: #fff;
+    border-color: #1890ff;
+    height: 24px;
+    padding:10px;
+    font-size:14px;
+    border-radius:4px;
+    margin-top: 50px;
+}
 td {overflow: auto;height: auto}
 
 </style>
@@ -50,9 +59,13 @@ td {overflow: auto;height: auto}
         <button type="submit">搜索</button>
     </form>
 </div>
+<!--新增独立接口测试用例按钮-->
+<div style="margin-top: 15px;">
+<a class="button_add" href="../apis_manage/add/">新增</a>
+</div>
 <!--翻页功能-->
 <nav>
-    <span style = "position: absolute;right:100px;bottom: 30px">
+    <span style = "position: absolute;right:100px;bottom: 5px">
     <ul class="pagination justify-content-center">
             <li class="page-item">
                 <a class="page-link" href="/apis_manage/?page={{ apis_account }}">共{{ apis_account }}条</a>
@@ -106,6 +119,13 @@ td {overflow: auto;height: auto}
     </span>
 </nav>
 <!--单一接口测试用例-->
+{% if message %}
+<script>
+
+        alert("{{message}}");
+
+</script>
+{% endif %}
 <div class="row" style = "padding-top: 20px;padding-left: 20px" >
     <div class="col-md-ll" >
         <table class="table table-striped" border="0.5" width="100%" >
@@ -116,13 +136,13 @@ td {overflow: auto;height: auto}
                 <th>用例名称</th>
                 <th>用例标题</th>
                 <th>用例方法</th>
-                <th>接口路径</th>
+                <th height="20px">接口路径</th>
                 <th>是否启用</th>
                 <th>实际结果</th>
                 <th>测试负责人</th>
                 <th>创建时间</th>
-                <th>编辑</th>
-                <th>删除</th>
+                <th>操作</th>
+
             </tr>
         </thead>
         <tbody>
@@ -140,13 +160,11 @@ td {overflow: auto;height: auto}
             <td>{{ api.create_time }}</td>
             <td>
                 <a style='color:lightblue' class="related-widget-wrapper-link add-related"
-                       id="add_id_Apis" href="../admin/apitest/apis/{{ api.id  }}/change/">
+                       id="update_id_Apis" href="/apis_manage/update/?id={{ api.id  }}">
                     <img src="/static/admin/img/icon-changelink.svg">
                 </a>
-            </td>
-            <td>
                 <a style='color:red' class="related-widget-wrapper-link add-related"
-                       id="add_id_Apis" href="../admin/apitest/apis/{{ api.id  }}/delete/">
+                       id="delete_id_Apis" href="/apis_manage/delete/?id={{ api.id  }}">
                     <img src="/static/admin/img/icon-deletelink.svg">
                 </a>
             </td>

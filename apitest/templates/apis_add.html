@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+
+<html lang="zh-hans" dir="ltr">
+<head>
+<title>增加 单一场景接口 | Django 站点管理员</title>
+<link rel="stylesheet" type="text/css" href="/static/admin/css/base.css">
+
+  <link rel="stylesheet" type="text/css" href="/static/admin/css/nav_sidebar.css">
+  <script src="/static/admin/js/nav_sidebar.js" defer></script>
+
+<link rel="stylesheet" type="text/css" href="/static/admin/css/forms.css">
+
+
+<script src="/admin/jsi18n/"></script>
+<script src="/static/admin/js/vendor/jquery/jquery.js"></script>
+<script src="/static/admin/js/jquery.init.js"></script>
+<script src="/static/admin/js/core.js"></script>
+<script src="/static/admin/js/admin/RelatedObjectLookups.js"></script>
+<script src="/static/admin/js/actions.js"></script>
+<script src="/static/admin/js/urlify.js"></script>
+<script src="/static/admin/js/prepopulate.js"></script>
+<script src="/static/admin/js/vendor/xregexp/xregexp.js"></script>
+
+
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/responsive.css">
+    <style>
+        .vTextField{
+            width:800px;
+        }
+        #id_apiparamvalue{
+            rows:"10";
+            cols:"30";
+            width:800px;
+            height:500px;
+            overflow-y: auto;
+        }
+    </style>
+
+<meta name="robots" content="NONE,NOARCHIVE">
+</head>
+
+
+<body class=" app-apitest model-apis change-form"
+  data-admin-utc-offset="28800">
+
+<!-- Container -->
+<!--
+<div class="breadcrumbs">
+<a href="/admin/">首页</a>
+&rsaquo; <a href="/admin/apitest/">Apitest</a>
+&rsaquo; <a href="/admin/apitest/apis/">单一场景接口</a>
+&rsaquo; 增加 单一场景接口
+</div>
+
+
+
+    <div class="main shifted" id="main">
+
+
+
+<button class="sticky toggle-nav-sidebar" id="toggle-nav-sidebar" aria-label="切换导航"></button>
+<nav class="sticky" id="nav-sidebar">
+
+
+
+
+    <div class="app-apitest module current-app">
+      <table>
+        <caption>
+          <a href="/admin/apitest/" class="section" title="在应用程序 Apitest 中的模型">Apitest</a>
+        </caption>
+
+          <tr class="model-apis current-model">
+
+              <th scope="row"><a href="/admin/apitest/apis/" aria-current="page">单一场景接口</a></th>
+
+
+
+              <td><a href="/admin/apitest/apis/add/" class="addlink">增加</a></td>
+
+
+
+          </tr>
+
+          <tr class="model-apitest">
+
+              <th scope="row"><a href="/admin/apitest/apitest/">流程场景接口</a></th>
+
+
+
+              <td><a href="/admin/apitest/apitest/add/" class="addlink">增加</a></td>
+
+
+
+          </tr>
+
+          <tr class="model-users">
+
+              <th scope="row"><a href="/admin/apitest/users/">用例用户</a></th>
+
+
+
+              <td><a href="/admin/apitest/users/add/" class="addlink">增加</a></td>
+
+
+
+          </tr>
+
+      </table>
+    </div>
+
+    <div class="app-apptest module">
+      <table>
+        <caption>
+          <a href="/admin/apptest/" class="section" title="在应用程序 Apptest 中的模型">Apptest</a>
+        </caption>
+
+          <tr class="model-appcase">
+
+              <th scope="row"><a href="/admin/apptest/appcase/">App测试用例</a></th>
+
+
+
+              <td><a href="/admin/apptest/appcase/add/" class="addlink">增加</a></td>
+
+
+
+          </tr>
+
+      </table>
+    </div>
+
+    <div class="app-bug module">
+      <table>
+        <caption>
+          <a href="/admin/bug/" class="section" title="在应用程序 Bug 中的模型">Bug</a>
+        </caption>
+
+          <tr class="model-bug">
+
+              <th scope="row"><a href="/admin/bug/bug/">Bug管理</a></th>
+
+
+
+              <td><a href="/admin/bug/bug/add/" class="addlink">增加</a></td>
+
+
+
+          </tr>
+
+      </table>
+    </div>
+
+    <div class="app-product module">
+      <table>
+        <caption>
+          <a href="/admin/product/" class="section" title="在应用程序 Product 中的模型">Product</a>
+        </caption>
+
+          <tr class="model-product">
+
+              <th scope="row"><a href="/admin/product/product/">产品管理</a></th>
+
+
+
+              <td><a href="/admin/product/product/add/" class="addlink">增加</a></td>
+
+
+
+          </tr>
+
+      </table>
+    </div>
+
+    <div class="app-set module">
+      <table>
+        <caption>
+          <a href="/admin/set/" class="section" title="在应用程序 Set 中的模型">Set</a>
+        </caption>
+
+          <tr class="model-set">
+
+              <th scope="row"><a href="/admin/set/set/">系统设置-值</a></th>
+
+
+
+              <td><a href="/admin/set/set/add/" class="addlink">增加</a></td>
+
+
+
+          </tr>
+
+      </table>
+    </div>
+
+    <div class="app-webtest module">
+      <table>
+        <caption>
+          <a href="/admin/webtest/" class="section" title="在应用程序 Webtest 中的模型">Webtest</a>
+        </caption>
+
+          <tr class="model-webcase">
+
+              <th scope="row"><a href="/admin/webtest/webcase/">Web测试用例</a></th>
+
+
+
+              <td><a href="/admin/webtest/webcase/add/" class="addlink">增加</a></td>
+
+
+
+          </tr>
+
+      </table>
+    </div>
+
+    <div class="app-auth module">
+      <table>
+        <caption>
+          <a href="/admin/auth/" class="section" title="在应用程序 认证和授权 中的模型">认证和授权</a>
+        </caption>
+
+          <tr class="model-user">
+
+              <th scope="row"><a href="/admin/auth/user/">用户</a></th>
+
+
+
+              <td><a href="/admin/auth/user/add/" class="addlink">增加</a></td>
+
+
+
+          </tr>
+
+          <tr class="model-group">
+
+              <th scope="row"><a href="/admin/auth/group/">组</a></th>
+
+
+
+              <td><a href="/admin/auth/group/add/" class="addlink">增加</a></td>
+
+
+
+          </tr>
+
+      </table>
+    </div>
+
+
+
+</nav>
+
+
+
+      <div class="content">
+
+
+-->
+        <!-- Content -->
+        <div id="content" class="colM">
+
+          <h1>增加 单一场景接口</h1>
+
+          <div id="content-main" style="height:600px;overflow:auto;background:#EEEEEE;">
+
+
+
+<form method="post" id="apis_form" action="/apis_manage/add/submit/">
+    {% csrf_token %}
+<div>
+  <fieldset class="module aligned ">
+
+
+
+        <div class="form-row field-Product">
+
+                <div>
+
+
+                        <label for="id_Product"><span style="color:red;">* </span>Product:</label>
+                            <div class="related-widget-wrapper">
+    <select name="Product" id="id_Product">
+  <option value="" selected>---------</option>
+
+  <option value="1">高保真环境ERP后台</option>
+
+</select>
+
+
+        <a class="related-widget-wrapper-link change-related" id="id_Product"
+            data-href-template="/admin/product/product/__fk__/change/?_to_field=id&amp;_popup=1"
+            title="更改选中的产品管理"><img src="/static/admin/img/icon-changelink.svg" alt="修改"></a><a class="related-widget-wrapper-link add-related" id="add_id_Product"
+            href="/admin/product/product/add/?_to_field=id&amp;_popup=1"
+            title="增加另一个 产品管理"><img src="/static/admin/img/icon-addlink.svg" alt="增加"></a>
+</div>
+                </div>
+        </div>
+        <div class="form-row field-feature">
+                <div>
+                        <label class="required" for="id_feature"><span style="color:red;">* </span>模块名称:</label>
+                            <input type="text" name="feature" class="vTextField" maxlength="50" required id="id_feature">
+                </div>
+        </div>
+        <div class="form-row field-story">
+                <div>
+                        <label class="required" for="id_story"><span style="color:red;">* </span>用例名称:</label>
+                            <input type="text" name="story" class="vTextField" maxlength="50" required id="id_story">
+                </div>
+      </div>
+        <div class="form-row field-title">
+                <div>
+                        <label class="required" for="id_title"><span style="color:red;">* </span>用例标题:</label>
+                            <input type="text" name="title" class="vTextField" maxlength="50" required id="id_title">
+                </div>
+        </div>
+        <div class="form-row field-link">
+                <div>
+
+
+                        <label for="id_link">用例链接:</label>
+
+                            <input type="text" name="link" class="vTextField" maxlength="200" id="id_link">
+
+
+
+                </div>
+
+        </div>
+
+        <div class="form-row field-issue">
+
+
+                <div>
+
+
+                        <label for="id_issue">缺陷链接:</label>
+
+                            <input type="text" name="issue" class="vTextField" maxlength="200" id="id_issue">
+
+
+
+                </div>
+
+        </div>
+
+        <div class="form-row field-url">
+
+
+                <div>
+
+
+                        <label class="required" for="id_url"><span style="color:red;">* </span>Url地址:</label>
+
+                            <input type="text" name="url" class="vTextField" maxlength="500" required id="id_url">
+
+
+
+                </div>
+
+        </div>
+        <div class="form-row field-method">
+                <div>
+                        <label class="required" for="id_method"><span style="color:red;">* </span>请求方法:</label>
+
+                            <select name="method" id="id_method">
+  <option value="0" selected>get</option>
+
+  <option value="1">post</option>
+
+  <option value="2">put</option>
+
+  <option value="3">delete</option>
+
+  <option value="4">patch</option>
+
+</select>
+                </div>
+        </div>
+        <div class="form-row field-headers">
+                <div>
+                        <label for="id_headers">请求头:</label>
+                            <input type="text" name="headers" class="vTextField" maxlength="200" id="id_headers">
+                </div>
+        </div>
+
+        <div>
+                <div>
+                        <label for="id_apiparamvalue">请求参数和值:</label>
+                            <textarea  name="apiparamvalue"  maxlength="5000" rows="10" cols="30" id="id_apiparamvalue"></textarea>
+                </div>
+        </div>
+        <div class="form-row field-enable">
+                <div class="checkbox-row">
+                        <input type="checkbox" name="enable" id="id_enable"><label class="vCheckboxLabel" for="id_enable">是否启用</label>
+                </div>
+        </div>
+        <div class="form-row field-exceptresponse">
+                <div>
+                        <label class="required" for="id_exceptresponse"><span style="color:red;">* </span>期望响应:</label>
+                            <input type="text" name="exceptresponse" value="{&quot;code&quot;:1,&quot;message&quot;:&quot;操作成功&quot;}" class="vTextField" maxlength="200" required id="id_exceptresponse">
+                </div>
+        </div>
+        <div class="form-row field-tester">
+                <div>
+                        <label class="required" for="id_tester"><span style="color:red;">* </span>测试人:</label>
+                            <input type="text" name="tester" class="vTextField" maxlength="20" required id="id_tester">
+                </div>
+        </div>
+</fieldset>
+<input type="submit" value="保存" class="default" name="_save">
+    <script id="django-admin-form-add-constants"
+            src="/static/admin/js/change_form.js"
+
+                data-model-name="apis"
+
+            async>
+    </script>
+<script id="django-admin-prepopulated-fields-constants"
+        src="/static/admin/js/prepopulate_init.js"
+        data-prepopulated-fields="[]">
+</script>
+</div>
+</form></div>
+
+
+          <br class="clear">
+        </div>
+        <!-- END Content -->
+        <div id="footer"></div>
+      </div>
+    </div>
+</div>
+<!-- END Container -->
+</body>
+</html>

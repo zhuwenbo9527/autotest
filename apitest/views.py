@@ -98,13 +98,15 @@ def getpagemessage(request, message_list):
     return message_list, left_has_more, right_has_more, left_page_range, right_page_range,paginator
 
 @login_required
-def apis_manage(request):
+def apis_manage(request, apis_list=None, message=None):
+    if apis_list :
+        apis_list = apis_list
+    else:
+        apis_list = Apis.objects.filter(isdelete=0)
     username = request.session.get('user', '')
-    apis_list = Apis.objects.all()
     apis_account = apis_list.count()
     apis_list, left_has_more, right_has_more, left_page_range, right_page_range, paginator = getpagemessage(request, apis_list)
-
-    return render(request, "apis_manage.html", {'user': username, "apis": apis_list, "left_has_more": left_has_more, "right_has_more": right_has_more, "left_page_range": left_page_range,"right_page_range": right_page_range, "paginator":paginator, "apis_account":apis_account })
+    return render(request, "apis_manage.html", {'user': username, "apis": apis_list, "left_has_more": left_has_more, "right_has_more": right_has_more, "left_page_range": left_page_range,"right_page_range": right_page_range, "paginator":paginator, "apis_account": apis_account, "message":message })
 
 @login_required
 def users_manage(request):
@@ -117,8 +119,8 @@ def users_manage(request):
 def apissearch(request):
     username = request.session.get('user', '')
     search_feature = request.GET.get("feature", "")
-    apis_list = Apis.objects.filter(feature__contains=search_feature)
-    return render(request, 'apis_manage.html', {"user": username, "apis": apis_list})
+    apis_list = Apis.objects.filter(feature__contains=search_feature, isdelete=0)
+    return apis_manage(request, apis_list=apis_list)
 
 @login_required
 def apitestsearch(request):
@@ -140,42 +142,70 @@ def left(request):
     return render(request, "left.html")
 # Create your views here.
 
-class ApisView(ListView):
-    model = Apis
-    template_name = 'apis_manage.html'
-    context_object_name = 'apis_manage'
-    paginate_by = 10
-    ordering = '-id'
-    page_kwarg = 'page'
 
-    def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(*args, **kwargs)
-        paginator = context['paginator']
-        page_obj = context['page_obj']
-        context.update(self.get_pagination_data(paginator, page_obj))
-        return context
 
-    @staticmethod
-    def get_pagination_data(paginator, page_obj, around=2):
-        """这个分页算法的核心部分，其实仔细看看也不难"""
-        current = page_obj.number  # 当前页码
-        total = paginator.num_pages  # 总共的页码
-        if current <= around + 3:
-            left_has_more = False
-            left_page_range = range(1, current)
-        else:
-            left_has_more = True
-            left_page_range = range(current - around, current)
-        if current >= total - around - 2:
-            right_has_more = False
-            right_page_range = range(current + 1, total + 1)
-        else:
-            right_has_more = True
-            right_page_range = range(current + 1, current + around + 1)
-        return {
-            'left_has_more': left_has_more,
-            'right_has_more': right_has_more,
-            'left_page_range': left_page_range,
-            'right_page_range': right_page_range
-        }
+@xframe_options_sameorigin
+def apis_add(request):
+    return render(request, "apis_add.html")
 
+
+def apis_add_submit(request):
+    if request.POST:
+        product_id = request.POST.get("Product")
+        feature = request.POST.get("feature")
+        story = request.POST.get("story")
+        title = request.POST.get("title")
+        link = request.POST.get("link")
+        issue = request.POST.get("issue")
+        url = request.POST.get("url")
+        method = request.POST.get("method")
+        headers = request.POST.get("headers")
+        apiparamvalue = request.POST.get("apiparamvalue")
+        enable = True if request.POST.get("enable") == "on" else False
+        exceptresponse = request.POST.get("exceptresponse")
+        tester = request.POST.get("tester")
+        Apis.objects.create(Product_id=product_id, feature=feature, story=story, title=title, link=link, issue=issue, url=url,
+                                   method=method, headers=headers, apiparamvalue=apiparamvalue, enable=enable, exceptresponse=exceptresponse, tester=tester)
+    return apis_manage(request)
+
+def apis_update_submit(request):
+    if request.POST:
+        id = request.POST.get("id")
+        product_id = request.POST.get("Product")
+        feature = request.POST.get("feature")
+        story = request.POST.get("story")
+        title = request.POST.get("title")
+        link = request.POST.get("link")
+        issue = request.POST.get("issue")
+        url = request.POST.get("url")
+        method = request.POST.get("method")
+        headers = request.POST.get("headers")
+        apiparamvalue = request.POST.get("apiparamvalue")
+        enable = True if request.POST.get("enable") == "on" else False
+        exceptresponse = request.POST.get("exceptresponse")
+        tester = request.POST.get("tester")
+        try:
+            Apis.objects.filter(id=id).update(Product_id=product_id, feature=feature, story=story, title=title, link=link, issue=issue, url=url,
+                                   method=method, headers=headers, apiparamvalue=apiparamvalue, enable=enable, exceptresponse=exceptresponse, tester=tester)
+            return apis_manage(request, message="保存成功")
+        except Except as e:
+            return apis_manage(request, message="保存失败，"+str(e))
+
+
+def apis_update(request):
+    if request.GET:
+        id = request.GET.get("id")
+        api = Apis.objects.get(id=id)
+    return render(request, "apis_update.html", {"api": api})
+
+def apis_delete(request):
+    if request.GET:
+        id = request.GET.get("id")
+        api = Apis.objects.get(id=id)
+    return render(request, "apis_delete.html", {"api": api})
+
+def apis_delete_submit(request):
+    if request.POST:
+        id = request.POST.get("id")
+        Apis.objects.filter(id=id).update(isdelete = 1)
+    return apis_manage(request, message="删除成功")
