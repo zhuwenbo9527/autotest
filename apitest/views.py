@@ -2,11 +2,12 @@ from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseRedirect #加入引用,
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth
-from apitest.models import Apitest,Apistep,Apis,Users
+from apitest.models import Apitest, Apistep, Apis, Users, Product
 from django.contrib.auth import authenticate, login
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger, InvalidPage
 from django.views.decorators.clickjacking import xframe_options_sameorigin
 from django.views.generic import ListView
+from .form import ApitestModelForm, ApistepModelFormSet
 import pymysql
 
 
@@ -218,8 +219,19 @@ def apis_delete_submit(request):
 def apitest_add(request):
 
     apitests_list = Apitest.objects.all()
-    return render(request, "apitest_add.html")
+    return render(request, "apitest_add1.html")
 
 def apitest_add_submit(request):
+    if request.POST:
+        t_form = ApitestModelForm(request.POST)
+        t_form.instance.Product_id = Product.objects.get(id= request.POST.get("Product_id")).id
+        t_form.instance.apitestresult = 1
+        if t_form.is_valid():
+            t.save()
 
-    pass
+            i_formset = ApistepModelFormSet(request.POST, instance=1)
+            if i_formset.is_valid():
+                i_formset.save()
+                return apis_manage(request)
+
+    return apis_manage(request)

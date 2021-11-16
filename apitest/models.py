@@ -5,7 +5,7 @@ from product.models import Product
 
 class Apitest(models.Model):
     id = models.BigAutoField(primary_key=True)
-    Product = models.ForeignKey('product.Product', on_delete=models.CASCADE, blank = False)
+    Product = models.ForeignKey('product.Product', on_delete=models.CASCADE, blank=False)
     apitestfeature = models.CharField('模块名称', max_length=64)
     apiteststory = models.CharField('用例名称', max_length=64)
     apitester = models.CharField('测试负责人', max_length=16)
