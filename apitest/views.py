@@ -219,19 +219,41 @@ def apis_delete_submit(request):
 def apitest_add(request):
 
     apitests_list = Apitest.objects.all()
-    return render(request, "apitest_add1.html")
+    return render(request, "apitest_add.html")
 
 def apitest_add_submit(request):
     if request.POST:
         t_form = ApitestModelForm(request.POST)
-        t_form.instance.Product_id = Product.objects.get(id= request.POST.get("Product_id")).id
-        t_form.instance.apitestresult = 1
+        # t_form.instance.Product_id = Product.objects.get(id= request.POST.get("Product_id")).id
         if t_form.is_valid():
+            t = t_form.save(commit=False)
             t.save()
 
-            i_formset = ApistepModelFormSet(request.POST, instance=1)
+            i_formset = ApistepModelFormSet(request.POST, instance=t)
             if i_formset.is_valid():
                 i_formset.save()
-                return apis_manage(request)
+                return apitest_manage(request)
+    return apitest_manage(request)
 
-    return apis_manage(request)
+def apitest_update(request):
+    if request.GET:
+        id = request.GET.get("id")
+        apitest = Apitest.objects.get(id=id)
+        apisteps = Apistep.objects.filter(Apitest_id=id)
+    return render(request, "apitest_update.html", {"apitest": apitest, "apisteps":apisteps})
+
+def apitest_update_sumbit(request):
+    if request.POST:
+        apitest_id = request.POST.get("id")
+        apitest = Apitest.objects.get(id=apitest_id)
+        apisteps = Apistep.objects.filter(Apitest_id=apitest_id)
+        t_form = ApitestModelForm(instance=apitest, data=request.POST)
+        if t_form.is_valid():
+            t = t_form.save(commit=False)
+            t.save()
+            i_formset = ApistepModelFormSet(request.POST, instance=t)
+            if i_formset.is_valid():
+                i_formset.save()
+                return apitest_manage(request)
+    return apitest_manage(request)
+    pass

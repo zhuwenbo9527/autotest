@@ -5,8 +5,10 @@ class ApitestModelForm(forms.ModelForm):
     class Meta:
         model = models.Apitest
         fields = (
+                  'Product',
                   'apitestfeature',
                   'apiteststory',
+                  'apitestresult',
                   'apitester',)
 
 ApistepModelFormSet = forms.inlineformset_factory(models.Apitest,
@@ -16,6 +18,11 @@ ApistepModelFormSet = forms.inlineformset_factory(models.Apitest,
                                                             'url',
                                                             'apimethod',
                                                             'apiparamvalue',
-                                                            'exceptresponse'),
+                                                            'exceptresponse',
+                                                            'actualresponse',
+                                                            'result',
+                                                            'apistatus',
+                                                            'Apitest',
+                                                            'headers'),
                                                   extra=1,
                                                   )

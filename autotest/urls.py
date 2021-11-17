@@ -34,6 +34,8 @@ urlpatterns = [
     path('apitest_manage/', views.apitest_manage),
     path('apitest_manage/add/', views.apitest_add),
     path('apitest_manage/add/submit/', views.apitest_add_submit),
+    path('apitest_manage/update/', views.apitest_update),
+    path('apitest_manage/update/submit/', views.apitest_update_sumbit),
     path('apistep_manage/', views.apistep_manage),
     path('apis_manage/', views.apis_manage),
     path('apis_manage/add/', views.apis_add),

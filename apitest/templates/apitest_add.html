@@ -61,7 +61,7 @@
                         <label class="required" for="id_Product">Product:</label>
 
                             <div class="related-widget-wrapper">
-    <select name="Product_id" required id="id_Product">
+    <select name="Product" required id="id_Product">
   <option value="" selected>---------</option>
 
   <option value="1">高保真环境ERP后台</option>
@@ -73,11 +73,7 @@
             title="更改选中的产品管理"><img src="/static/admin/img/icon-changelink.svg" alt="修改"></a><a class="related-widget-wrapper-link add-related" id="add_id_Product"
             href="/admin/product/product/add/?_to_field=id&amp;_popup=1"
             title="增加另一个 产品管理"><img src="/static/admin/img/icon-addlink.svg" alt="增加"></a>
-
 </div>
-
-
-
                 </div>
 
         </div>
@@ -107,10 +103,10 @@
 <input type="hidden" name="apistep_set-TOTAL_FORMS" value="1" id="id_apistep_set-TOTAL_FORMS"><input type="hidden" name="apistep_set-INITIAL_FORMS" value="0" id="id_apistep_set-INITIAL_FORMS"><input type="hidden" name="apistep_set-MIN_NUM_FORMS" value="0" id="id_apistep_set-MIN_NUM_FORMS"><input type="hidden" name="apistep_set-MAX_NUM_FORMS" value="1000" id="id_apistep_set-MAX_NUM_FORMS">
 <fieldset class="module ">
      <h2>Apisteps</h2>
-   <table>
+   <table >
      <thead><tr>
        <th class="original"></th>
-         <th class="column-waittime">前置等待时间
+         <th class="column-waittime" >前置等待时间
          </th>
          <th class="column-title required">用例标题
          </th>
@@ -134,16 +130,16 @@
           <input type="hidden" name="apistep_set-0-Apitest" id="id_apistep_set-0-Apitest">
         </td>
               <td class="field-waittime">
-                  <input type="text" name="apistep_set-0-waittime" class="vTextField" maxlength="100" id="id_apistep_set-0-waittime">
+                  <input type="text" name="apistep_set-0-waittime" class="vCharField" maxlength="10" id="id_apistep_set-0-waittime">
               </td>
               <td class="field-title">
-                  <input type="text" name="apistep_set-0-title" class="vTextField" maxlength="200" id="id_apistep_set-0-title">
+                  <input type="text" name="apistep_set-0-title" class="vCharField" maxlength="200" id="id_apistep_set-0-title">
               </td>
               <td class="field-url">
-                  <input type="text" name="apistep_set-0-url" class="vTextField" maxlength="150" id="id_apistep_set-0-url">
+                  <input type="text" name="apistep_set-0-url" class="vCharField" maxlength="150" id="id_apistep_set-0-url">
               </td>
               <td class="field-headers">
-                  <input type="text" name="apistep_set-0-headers" class="vTextField" maxlength="100" id="id_apistep_set-0-headers">
+                  <input type="text" name="apistep_set-0-headers" class="vCharField" maxlength="100" id="id_apistep_set-0-headers">
               </td>
               <td class="field-apimethod">
                   <select name="apistep_set-0-apimethod" id="id_apistep_set-0-apimethod">
@@ -155,10 +151,10 @@
 </select>
               </td>
               <td class="field-apiparamvalue">
-                  <input type="text" name="apistep_set-0-apiparamvalue" class="vTextField" maxlength="5000" id="id_apistep_set-0-apiparamvalue">
+                  <textarea type="text" name="apistep_set-0-apiparamvalue" class="vCharField" maxlength="5000" id="id_apistep_set-0-apiparamvalue"></textarea>
               </td>
               <td class="field-exceptresponse">
-                  <input type="text" name="apistep_set-0-exceptresponse" class="vTextField" maxlength="200" id="id_apistep_set-0-exceptresponse">
+                  <input type="text" name="apistep_set-0-exceptresponse" class="vCharField" maxlength="200" id="id_apistep_set-0-exceptresponse">
               </td>
           <td class="delete"></td>
         </tr>
@@ -169,16 +165,16 @@
           <input type="hidden" name="apistep_set-__prefix__-Apitest" id="id_apistep_set-__prefix__-Apitest">
         </td>
               <td class="field-waittime">
-                  <input type="text" name="apistep_set-__prefix__-waittime" class="vTextField" maxlength="100" id="id_apistep_set-__prefix__-waittime">
+                  <input type="text" name="apistep_set-__prefix__-waittime" class="vCharField" maxlength="100" id="id_apistep_set-__prefix__-waittime">
               </td>
               <td class="field-title">
-                  <input type="text" name="apistep_set-__prefix__-title" class="vTextField" maxlength="200" id="id_apistep_set-__prefix__-title">
+                  <input type="text" name="apistep_set-__prefix__-title" class="vCharField" maxlength="200" id="id_apistep_set-__prefix__-title">
               </td>
               <td class="field-url">
-                  <input type="text" name="apistep_set-__prefix__-url" class="vTextField" maxlength="150" id="id_apistep_set-__prefix__-url">
+                  <input type="text" name="apistep_set-__prefix__-url" class="vCharField" maxlength="150" id="id_apistep_set-__prefix__-url">
               </td>
               <td class="field-headers">
-                  <input type="text" name="apistep_set-__prefix__-headers" class="vTextField" maxlength="100" id="id_apistep_set-__prefix__-headers">
+                  <input type="text" name="apistep_set-__prefix__-headers" class="vCharField" maxlength="100" id="id_apistep_set-__prefix__-headers">
               </td>
               <td class="field-apimethod">
                   <select name="apistep_set-__prefix__-apimethod" id="id_apistep_set-__prefix__-apimethod">
@@ -190,10 +186,10 @@
 </select>
               </td>
               <td class="field-apiparamvalue">
-                  <input type="text" name="apistep_set-__prefix__-apiparamvalue" class="vTextField" maxlength="5000" id="id_apistep_set-__prefix__-apiparamvalue">
+                  <textarea type="text" name="apistep_set-__prefix__-apiparamvalue" class="vCharField" maxlength="5000" id="id_apistep_set-__prefix__-apiparamvalue"></textarea>
               </td>
               <td class="field-exceptresponse">
-                  <input type="text" name="apistep_set-__prefix__-exceptresponse" class="vTextField" maxlength="200" id="id_apistep_set-__prefix__-exceptresponse">
+                  <input type="text" name="apistep_set-__prefix__-exceptresponse" class="vCharField" maxlength="200" id="id_apistep_set-__prefix__-exceptresponse">
               </td>
           <td class="delete"></td>
         </tr>

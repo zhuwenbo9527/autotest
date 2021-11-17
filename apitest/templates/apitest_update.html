@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+
+<html lang="zh-hans" dir="ltr">
+<head>
+<title>新增销售单 | 修改 流程场景接口 | Django 站点管理员</title>
+<link rel="stylesheet" type="text/css" href="/static/admin/css/base.css">
+
+  <link rel="stylesheet" type="text/css" href="/static/admin/css/nav_sidebar.css">
+  <script src="/static/admin/js/nav_sidebar.js" defer></script>
+
+<link rel="stylesheet" type="text/css" href="/static/admin/css/forms.css">
+
+
+<script src="/admin/jsi18n/"></script>
+<script src="/static/admin/js/vendor/jquery/jquery.js"></script>
+<script src="/static/admin/js/jquery.init.js"></script>
+<script src="/static/admin/js/core.js"></script>
+<script src="/static/admin/js/inlines.js"></script>
+<script src="/static/admin/js/admin/RelatedObjectLookups.js"></script>
+<script src="/static/admin/js/actions.js"></script>
+<script src="/static/admin/js/urlify.js"></script>
+<script src="/static/admin/js/prepopulate.js"></script>
+<script src="/static/admin/js/vendor/xregexp/xregexp.js"></script>
+
+
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/responsive.css">
+<style>
+
+
+
+</style>
+
+<meta name="robots" content="NONE,NOARCHIVE">
+</head>
+
+
+<body class=" app-apitest model-apitest change-form"
+  data-admin-utc-offset="28800">
+
+<!-- Container -->
+<div id="container">
+
+
+
+
+
+
+
+ <!-- Content -->
+        <div id="content" class="colM" style=" overflow:scroll; width:95%; height:100%"  >
+
+          <h1>修改 流程场景接口</h1>
+          <h2>新增销售单</h2>
+          <div id="content-main">
+  <ul class="object-tools">
+<li>
+    <a href="/admin/apitest/apitest/23/history/" class="historylink">历史</a>
+</li>
+  </ul>
+<form method="post" id="apitest_form" action="/apitest_manage/update/submit/">
+    {% csrf_token %}
+    {{ apisteps.management_form }}
+<div>
+  <fieldset class="module aligned ">
+              <div class="form-row field-id" hidden="hidden" >
+                <div>
+                        <label class="required" for="id_feature">id:</label>
+                            <input  type="text" name="id" readonly = "true" aria-hidden="true" class="vTextField" maxlength="50" required id="id_id" value="{{ apitest.id }}">
+                </div>
+        </div>
+        <div class="form-row field-Product">
+                <div>
+                        <label class="required" for="id_Product">Product:</label>
+                            <div class="related-widget-wrapper">
+    <select name="Product" required id="id_Product">
+  <option value="">---------</option>
+  <option value="1" selected>高保真环境ERP后台</option>
+</select>
+        <a class="related-widget-wrapper-link change-related" id="change_id_Product"
+            data-href-template="/admin/product/product/__fk__/change/?_to_field=id&amp;_popup=1"
+            title="更改选中的产品管理"><img src="/static/admin/img/icon-changelink.svg" alt="修改"></a><a class="related-widget-wrapper-link add-related" id="add_id_Product"
+            href="/admin/product/product/add/?_to_field=id&amp;_popup=1"
+            title="增加另一个 产品管理"><img src="/static/admin/img/icon-addlink.svg" alt="增加"></a>
+</div>
+  </div>
+ </div>
+        <div class="form-row field-apitestfeature">
+                <div>
+                        <label class="required" for="id_apitestfeature">模块名称:</label>
+                            <input type="text" name="apitestfeature" value="{{ apitest.apitestfeature }}" class="vTextField" maxlength="64" required id="id_apitestfeature">
+                </div>
+
+        </div>
+
+        <div class="form-row field-apiteststory">
+
+
+                <div>
+
+
+                        <label class="required" for="id_apiteststory">用例名称:</label>
+                            <input type="text" name="apiteststory" value="{{ apitest.apiteststory }}" class="vTextField" maxlength="64" required id="id_apiteststory">
+                </div>
+        </div>
+        <div class="form-row field-apitester">
+                <div>
+                        <label class="required" for="id_apitester">测试负责人:</label>
+
+                            <input type="text" name="apitester" value="{{ apitest.apitester }}" class="vTextField" maxlength="16" required id="id_apitester">
+                </div>
+        </div>
+</fieldset>
+<div class="js-inline-admin-formset inline-group" id="apistep_set-group"
+     data-inline-type="tabular"
+     data-inline-formset="{&quot;name&quot;: &quot;#apistep_set&quot;, &quot;options&quot;: {&quot;prefix&quot;: &quot;apistep_set&quot;, &quot;addText&quot;: &quot;\u6dfb\u52a0\u53e6\u4e00\u4e2a Apistep&quot;, &quot;deleteText&quot;: &quot;\u5220\u9664&quot;}}">
+  <div class="tabular inline-related last-related">
+<input type="hidden" name="apistep_set-TOTAL_FORMS" value="2" id="id_apistep_set-TOTAL_FORMS"><input type="hidden" name="apistep_set-INITIAL_FORMS" value="1" id="id_apistep_set-INITIAL_FORMS"><input type="hidden" name="apistep_set-MIN_NUM_FORMS" value="0" id="id_apistep_set-MIN_NUM_FORMS"><input type="hidden" name="apistep_set-MAX_NUM_FORMS" value="1000" id="id_apistep_set-MAX_NUM_FORMS">
+<fieldset class="module ">
+     <h2>Apisteps</h2>
+   <table >
+     <thead><tr>
+       <th class="original"></th>
+         <th class="column-waittime">前置等待时间
+         </th>
+         <th class="column-title required">用例标题
+         </th>
+         <th class="column-url required">路径
+         </th>
+         <th class="column-headers">请求头
+         </th>
+         <th class="column-apimethod required">请求方法
+         </th>
+         <th class="column-apiparamvalue">请求参数和值
+         </th>
+         <th class="column-exceptresponse required">期望响应
+         </th>
+     <th>删除？</th>
+     </tr></thead>
+     <tbody>
+        {% for apistep in apisteps %}
+        <tr class="form-row has_original"
+             id="apistep_set-0">
+        <td class="original">
+          <p>
+          {{ apistep.title }}
+            </p>
+          <input type="hidden" name="apistep_set-0-id" value="{{ apistep.id }}" id="id_apistep_set-0-id">
+          <input type="hidden" name="apistep_set-0-Apitest" value="{{ apitest.id }}" id="id_apistep_set-0-Apitest">
+        </td>
+              <td class="field-waittime">
+                  <input type="text" name="apistep_set-0-waittime" value="{{ apistep.waittime }}" class="CharField" maxlength="100" id="id_apistep_set-0-waittime">
+              </td>
+              <td class="field-title">
+                  <input type="text" name="apistep_set-0-title" value="{{ apistep.title }}" class="CharField" maxlength="200" id="id_apistep_set-0-title">
+              </td>
+              <td class="field-url">
+                  <input type="text" name="apistep_set-0-url" value="{{ apistep.url }}" class="CharField" maxlength="150" id="id_apistep_set-0-url">
+              </td>
+              <td class="field-headers">
+                  <input type="text" name="apistep_set-0-headers" value="{{ apistep.headers }}" class="CharField" maxlength="100" id="id_apistep_set-0-headers">
+              </td>
+              <td class="field-apimethod">
+                  <select name="apistep_set-0-apimethod" id="id_apistep_set-0-apimethod">
+  <option value="get" selected>get</option>
+  <option value="post">post</option>
+  <option value="put">put</option>
+  <option value="delete">delete</option>
+  <option value="patch">patch</option>
+</select>
+              </td>
+              <td class="field-apiparamvalue">
+                  <input type="text" name="apistep_set-0-apiparamvalue" value="{{ apistep.apiparamvalue }}" class="CharField" maxlength="5000" id="id_apistep_set-0-apiparamvalue"></input>
+              </td>
+              <td class="field-exceptresponse">
+                  <input type="text" name="apistep_set-0-exceptresponse" value="{{ apistep.exceptresponse }}" class="CharField" maxlength="200" id="id_apistep_set-0-exceptresponse">
+              </td>
+          <td class="delete"><input type="checkbox" name="apistep_set-0-DELETE" id="id_apistep_set-0-DELETE"></td>
+        </tr>
+        {% endfor %}
+        <tr class="form-row "
+             id="apistep_set-1">
+        <td class="original">
+          <input type="hidden" name="apistep_set-1-id" id="id_apistep_set-1-id">
+          <input type="hidden" name="apistep_set-1-Apitest" value="23" id="id_apistep_set-1-Apitest">
+        </td>
+              <td class="field-waittime">
+                  <input type="text" name="apistep_set-1-waittime" class="CharField" maxlength="100" id="id_apistep_set-1-waittime">
+             </td>
+              <td class="field-title">
+                  <input type="text" name="apistep_set-1-title" class="CharField" maxlength="200" id="id_apistep_set-1-title">
+              </td>
+              <td class="field-url">
+                  <input type="text" name="apistep_set-1-url" class="CharField" maxlength="150" id="id_apistep_set-1-url">
+              </td>
+              <td class="field-headers">
+                  <input type="text" name="apistep_set-1-headers" class="CharField" maxlength="100" id="id_apistep_set-1-headers">
+              </td>
+              <td class="field-apimethod">
+                  <select name="apistep_set-1-apimethod" id="id_apistep_set-1-apimethod">
+  <option value="get" selected>get</option>
+  <option value="post">post</option>
+  <option value="put">put</option>
+  <option value="delete">delete</option>
+  <option value="patch">patch</option>
+</select>
+              </td>
+              <td class="field-apiparamvalue">
+                  <input type="text" name="apistep_set-1-apiparamvalue" class="CharField" maxlength="5000" id="id_apistep_set-1-apiparamvalue"></input>
+              </td>
+              <td class="field-exceptresponse">
+                  <input type="text" name="apistep_set-1-exceptresponse" class="CharField" maxlength="200" id="id_apistep_set-1-exceptresponse">
+              </td>
+          <td class="delete"></td>
+        </tr>
+        <tr class="form-row  empty-form"
+             id="apistep_set-empty">
+        <td class="original">
+          <input type="hidden" name="apistep_set-__prefix__-id" id="id_apistep_set-__prefix__-id">
+          <input type="hidden" name="apistep_set-__prefix__-Apitest" value="23" id="id_apistep_set-__prefix__-Apitest">
+        </td>
+              <td class="field-waittime">
+                  <input type="text" name="apistep_set-__prefix__-waittime" class="CharField" maxlength="100" id="id_apistep_set-__prefix__-waittime">
+              </td>
+              <td class="field-title">
+                  <input type="text" name="apistep_set-__prefix__-title" class="CharField" maxlength="200" id="id_apistep_set-__prefix__-title">
+              </td>
+              <td class="field-url">
+                  <input type="text" name="apistep_set-__prefix__-url" class="CharField" maxlength="150" id="id_apistep_set-__prefix__-url">
+              </td>
+              <td class="field-headers">
+                  <input type="text" name="apistep_set-__prefix__-headers" class="CharField" maxlength="100" id="id_apistep_set-__prefix__-headers">
+              </td>
+              <td class="field-apimethod">
+                  <select name="apistep_set-__prefix__-apimethod" id="id_apistep_set-__prefix__-apimethod">
+  <option value="get" selected>get</option>
+  <option value="post">post</option>
+  <option value="put">put</option>
+  <option value="delete">delete</option>
+  <option value="patch">patch</option>
+</select>
+              </td>
+              <td class="field-apiparamvalue">
+                  <input type="text" name="apistep_set-__prefix__-apiparamvalue" class="CharField" maxlength="5000" id="id_apistep_set-__prefix__-apiparamvalue"></input>
+              </td>
+              <td class="field-exceptresponse">
+                  <input type="text" name="apistep_set-__prefix__-exceptresponse" class="CharField" maxlength="200" id="id_apistep_set-__prefix__-exceptresponse">
+              </td>
+              <td class="field-actualresponse">
+                  <input type="text" name="apistep_set-__prefix__-actualresponse" value="null" class="CharField" maxlength="5000" id="id_apistep_set-__prefix__-actualresponse">
+              </td>
+              <td class="field-result">
+                  <input type="text" name="apistep_set-__prefix__-result" class="CharField" maxlength="20" id="id_apistep_set-__prefix__-result">
+              </td>
+              <td class="field-apistatus">
+                  <input type="checkbox" name="apistep_set-__prefix__-apistatus" id="id_apistep_set-__prefix__-apistatus">
+              </td>
+          <td class="delete"></td>
+        </tr>
+     </tbody>
+   </table>
+</fieldset>
+  </div>
+</div>
+<div class="submit-row">
+<input type="submit" value="保存" class="default" name="_save">
+    <p class="deletelink-box"><a href="/admin/apitest/apitest/23/delete/" class="deletelink">删除</a></p>
+<input type="submit" value="保存并增加另一个" name="_addanother">
+<input type="submit" value="保存并继续编辑" name="_continue">
+</div>
+    <script id="django-admin-form-add-constants"
+            src="/static/admin/js/change_form.js"
+            async>
+    </script>
+<script id="django-admin-prepopulated-fields-constants"
+        src="/static/admin/js/prepopulate_init.js"
+        data-prepopulated-fields="[]">
+</script>
+</div>
+</form></div>
+          <br class="clear">
+        </div>
+        <!-- END Content -->
+        <div id="footer"></div>
+      </div>
+    </div>
+</div>
+<!-- END Container -->
+</body>
+</html>
