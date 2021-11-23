@@ -11,6 +11,7 @@ class Apitest(models.Model):
     apitester = models.CharField('测试负责人', max_length=16)
     apitestresult = models.BooleanField('测试结果', blank=True)
     create_time = models.DateTimeField('创建时间', auto_now=True)
+    isdelete = models.SmallIntegerField('是否删除', default=0)
 
     class Meta:
         verbose_name = '流程场景接口'
@@ -41,6 +42,7 @@ class Apistep(models.Model):
     actualresponse = models.CharField('实际响应', max_length=5000, default='null', blank=True)
     result = models.CharField('测试结果', max_length=20, null=False, blank=True)
     apistatus = models.BooleanField('是否通过', blank=True)
+    isdelete = models.SmallIntegerField('是否删除', default=0)
     create_time = models.DateTimeField('创建时间', auto_now=True)
     #创建时间，自动获取当前时间
 
@@ -67,7 +69,7 @@ class Apis(models.Model):
     actualresponse = models.CharField('实际响应', max_length=5000, default='null', blank=True)
     result = models.CharField('测试结果', max_length=20, blank=True)
     tester = models.CharField('测试人', max_length=20, blank=False)
-    isdelete = models.SmallIntegerField("是否删除")
+    isdelete = models.SmallIntegerField('是否删除', default=0)
     create_time = models.DateTimeField('创建时间', auto_now=True)
 
     class Meta:

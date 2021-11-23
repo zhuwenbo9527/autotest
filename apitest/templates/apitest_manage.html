@@ -112,6 +112,13 @@ a.button_add{
         <button type="submit">搜索</button>
     </form>
 </div>
+{% if message %}
+<script>
+
+        alert("{{message}}");
+
+</script>
+{% endif %}
 <!--新增独立接口测试用例按钮-->
 <div style="margin-top: 15px;">
 <a class="button_add" href="/apitest_manage/add/">新增</a>
@@ -146,7 +153,7 @@ a.button_add{
                         <img src="/static/admin/img/icon-changelink.svg">
                     </a>
                     <a style='color:lightblue' class="related-widget-wrapper-link add-related"
-                       id="delete_id_Apitest" href="../admin/apitest/apitest/{{ apitest.id  }}/delete/">
+                       id="delete_id_Apitest" href="/apitest_manage/delete/?id={{ apitest.id  }}">
                         <img src="/static/admin/img/icon-deletelink.svg">
                     </a>
                 </td>

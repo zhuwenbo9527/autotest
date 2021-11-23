@@ -158,13 +158,15 @@ a.button_add{
                 <td>{{ apistep.create_time }}</td>
                 <td>
                     <a style='color:lightblue' class="related-widget-wrapper-link add-related"
-                       id="add_id_Apistep" href="../admin/apitest/apitest/{{ apistep.Apitest_id  }}/change/">
+                       id="add_id_Apistep" href="/apitest_manage/update/?id={{ apistep.Apitest_id  }}">
                         <img src="/static/admin/img/icon-changelink.svg">
                     </a>
+                    <!--
                     <a style='color:lightblue' class="related-widget-wrapper-link add-related"
-                       id="add_id_Apistep" href="../admin/apitest/apitest/{{ apistep.Apitest_id }}/delete/">
+                       id="add_id_Apistep" href="/apitest/update/?id={{ apistep.Apitest_id  }}">
                         <img src="/static/admin/img/icon-deletelink.svg">
                     </a>
+                    -->
                 </td>
             </tr>
             {% endfor %}

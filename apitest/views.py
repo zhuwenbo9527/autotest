@@ -18,6 +18,7 @@ def test(request):
 def home(request):
     return render(request, 'home.html')
 
+
 def login(request):
     if request.POST:
         username = password = ''
@@ -39,13 +40,13 @@ def logout(request):
     return render(request, 'login.html')
 
 
-#接口管理
+# 接口管理
 @login_required
-def apitest_manage(request, apitests_list=None):
+def apitest_manage(request, apitests_list=None, message=None):
     if apitests_list:
         apitests_list = apitests_list
     else:
-        apitests_list = Apitest.objects.all()
+        apitests_list = Apitest.objects.filter(isdelete=0)
     apitests_count = apitests_list.count()
     # 浏览器登录session 
     username = request.session.get('user', '')
@@ -55,16 +56,16 @@ def apitest_manage(request, apitests_list=None):
     return render(request, "apitest_manage.html",
                   {'user': username, "apitests": apitest_list, "left_has_more": left_has_more,
                    "right_has_more": right_has_more, "left_page_range": left_page_range,
-                   "right_page_range": right_page_range, "paginator": paginator, "apitests_count":apitests_count})
+                   "right_page_range": right_page_range, "paginator": paginator, "apitests_count":apitests_count, "message":message })
 
 
-#接口步骤管理
+# 接口步骤管理
 @login_required
-def apistep_manage(request,apisteps_list = None):
+def apistep_manage(request, apisteps_list=None, message=None):
     if apisteps_list:
         apisteps_list=apisteps_list
     else:
-        apisteps_list = Apistep.objects.all()
+        apisteps_list = Apistep.objects.filter(isdelete=0)
     # 浏览器登录session
     username = request.session.get('user', '')
     apisteps_count = apisteps_list.count()
@@ -103,6 +104,7 @@ def getpagemessage(request, message_list):
         right_page_range = range(currentPage + 1, currentPage + around + 1)
     return message_list, left_has_more, right_has_more, left_page_range, right_page_range,paginator
 
+
 @login_required
 def apis_manage(request, apis_list=None, message=None):
     if apis_list :
@@ -113,6 +115,7 @@ def apis_manage(request, apis_list=None, message=None):
     apis_account = apis_list.count()
     apis_list, left_has_more, right_has_more, left_page_range, right_page_range, paginator = getpagemessage(request, apis_list)
     return render(request, "apis_manage.html", {'user': username, "apis": apis_list, "left_has_more": left_has_more, "right_has_more": right_has_more, "left_page_range": left_page_range,"right_page_range": right_page_range, "paginator":paginator, "apis_account": apis_account, "message":message })
+
 
 @login_required
 def users_manage(request):
@@ -128,12 +131,14 @@ def apissearch(request):
     apis_list = Apis.objects.filter(feature__contains=search_feature, isdelete=0)
     return apis_manage(request, apis_list=apis_list)
 
+
 @login_required
 def apitestsearch(request):
     username = request.session.get('user', '')
     search_apitestfeature = request.GET.get("apitestfeature", "")
     apitests_list = Apitest.objects.filter(apitestfeature__contains=search_apitestfeature)
     return apitest_manage(request, apitests_list=apitests_list)
+
 
 @login_required
 def apistepsearch(request):
@@ -147,7 +152,6 @@ def apistepsearch(request):
 def left(request):
     return render(request, "left.html")
 # Create your views here.
-
 
 
 @xframe_options_sameorigin
@@ -173,6 +177,7 @@ def apis_add_submit(request):
         Apis.objects.create(Product_id=product_id, feature=feature, story=story, title=title, link=link, issue=issue, url=url,
                                    method=method, headers=headers, apiparamvalue=apiparamvalue, enable=enable, exceptresponse=exceptresponse, tester=tester)
     return apis_manage(request)
+
 
 def apis_update_submit(request):
     if request.POST:
@@ -204,11 +209,13 @@ def apis_update(request):
         api = Apis.objects.get(id=id)
     return render(request, "apis_update.html", {"api": api})
 
+
 def apis_delete(request):
     if request.GET:
         id = request.GET.get("id")
         api = Apis.objects.get(id=id)
     return render(request, "apis_delete.html", {"api": api})
+
 
 def apis_delete_submit(request):
     if request.POST:
@@ -216,10 +223,11 @@ def apis_delete_submit(request):
         Apis.objects.filter(id=id).update(isdelete = 1)
     return apis_manage(request, message="删除成功")
 
+
 def apitest_add(request):
 
-    apitests_list = Apitest.objects.all()
     return render(request, "apitest_add.html")
+
 
 def apitest_add_submit(request):
     if request.POST:
@@ -235,25 +243,50 @@ def apitest_add_submit(request):
                 return apitest_manage(request)
     return apitest_manage(request)
 
-def apitest_update(request):
+
+def apitest_update(request, id=None):
     if request.GET:
         id = request.GET.get("id")
-        apitest = Apitest.objects.get(id=id)
-        apisteps = Apistep.objects.filter(Apitest_id=id)
-    return render(request, "apitest_update.html", {"apitest": apitest, "apisteps":apisteps})
+    apitest = Apitest.objects.get(id=id)
+    apisteps = Apistep.objects.filter(Apitest_id=id)
+    return render(request, "apitest_update.html", {"apitest": apitest, "apisteps": apisteps, "count": apisteps.count()})
 
-def apitest_update_sumbit(request):
+
+def apitest_update_submit(request):
     if request.POST:
         apitest_id = request.POST.get("id")
+        _save = request.POST.get("_save")
+        _addanother = request.POST.get("_addanother")
+        _continue = request.POST.get("_continue")
+
         apitest = Apitest.objects.get(id=apitest_id)
-        apisteps = Apistep.objects.filter(Apitest_id=apitest_id)
         t_form = ApitestModelForm(instance=apitest, data=request.POST)
         if t_form.is_valid():
             t = t_form.save(commit=False)
             t.save()
-            i_formset = ApistepModelFormSet(request.POST, instance=t)
+            i_formset = ApistepModelFormSet(request.POST, request.FILES, instance=apitest)
             if i_formset.is_valid():
                 i_formset.save()
-                return apitest_manage(request)
-    return apitest_manage(request)
+                if _save:
+                    return apitest_manage(request)
+                if _addanother:
+                    return apitest_add(request)
+                if _continue:
+                    return apitest_update(request, id=apitest_id)
+
+
+def apitest_delete(request, id=None):
+    if request.GET:
+        id = request.GET.get("id")
+    apitest = Apitest.objects.get(id=id)
+    apisteps = Apistep.objects.filter(Apitest_id=id)
+    return render(request, "apitest_delete.html", {"apitest": apitest, "apisteps": apisteps, "count": apisteps.count()})
+
+
+def apitest_delete_submit(request):
+    if request.POST:
+        id = request.POST.get("id")
+        Apitest.objects.filter(id=id).update(isdelete=1)
+        Apistep.objects.filter(Apitest_id=id).update(isdelete=1)
+        return apitest_manage(request, message="删除成功")
     pass
