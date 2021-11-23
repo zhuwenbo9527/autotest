@@ -130,8 +130,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 # 解决django3.2版本Frame问题
-ALLOWED_HOSTS = ['*']
-X_FRAME_OPTIONS = 'ALLOWALL localhost:8080'
+ALLOWED_HOSTS = ['192.168.220.140:8080', '192.168.220.140']
+XS_SHARING_ALLOWED_METHODS = ['POST','GET','OPTIONS', 'PUT', 'DELETE']
+X_FRAME_OPTIONS = 'ALLOWALL 192.168.220.140:8080'
 # 解决django3.2版本隐式主键问题
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
