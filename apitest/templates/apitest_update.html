@@ -2,13 +2,12 @@
 
 <html lang="zh-hans" dir="ltr">
 <head>
-<title>新增销售单 | 修改 流程场景接口 | Django 站点管理员</title>
 <link rel="stylesheet" type="text/css" href="/static/admin/css/base.css">
 
   <link rel="stylesheet" type="text/css" href="/static/admin/css/nav_sidebar.css">
-  <script src="/static/admin/js/nav_sidebar.js" defer></script>
-
+    <script src="/static/admin/js/nav_sidebar.js" defer></script>
 <link rel="stylesheet" type="text/css" href="/static/admin/css/forms.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 
 
 <script src="/admin/jsi18n/"></script>
@@ -21,7 +20,21 @@
 <script src="/static/admin/js/urlify.js"></script>
 <script src="/static/admin/js/prepopulate.js"></script>
 <script src="/static/admin/js/vendor/xregexp/xregexp.js"></script>
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+<script>
+    $("#Revert").modal("hide");
+	function change(value){
+        //获取 text 的内容
+        id1 = document.getElementById('id').value;
+        document.getElementById(id1).value = value;
+    }
+    function Values(id,value){
+        $('#id').val(id)
+        $('#textarea').val(value)
+    }
+</script>
 
     <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/static/admin/css/responsive.css">
@@ -48,10 +61,9 @@
 
 
  <!-- Content -->
-        <div id="content" class="colM" style=" overflow:scroll; width:95%; height:100%"  >
+        <div id="content" class="colM" style=height:100%;overflow:auto;>
 
           <h1>修改 流程场景接口</h1>
-          <h2>新增销售单</h2>
           <div id="content-main">
   <ul class="object-tools">
 <li>
@@ -143,9 +155,9 @@
         <tr class="form-row has_original"
              id="apistep_set-0">
         <td class="original">
-          <p>
+
           {{ apistep.id }}
-            </p>
+
           <input type="hidden" name="apistep_set-{{ forloop.counter|add:-1 }}-id" value="{{ apistep.id }}" id="id_apistep_set-{{ forloop.counter|add:-1 }}-id">
           <input type="hidden" name="apistep_set-{{ forloop.counter|add:-1 }}-Apitest" value="{{ apistep.Apitest_id }}" id="id_apistep_set-{{ forloop.counter|add:-1 }}-Apitest">
         </td>
@@ -162,16 +174,37 @@
                   <input type="text" name="apistep_set-{{ forloop.counter|add:-1 }}-headers" value="{{ apistep.headers }}" class="CharField" maxlength="100" id="id_apistep_set-{{ forloop.counter|add:-1 }}-headers">
               </td>
               <td class="field-apimethod">
-                  <select name="apistep_set-{{ forloop.counter|add:-1 }}-apimethod" id="id_apistep_set-0-apimethod">
-  <option value="get" selected>get</option>
-  <option value="post">post</option>
-  <option value="put">put</option>
-  <option value="delete">delete</option>
-  <option value="patch">patch</option>
+                  <select name="apistep_set-{{ forloop.counter|add:-1 }}-apimethod" id="id_apistep_set-{{ forloop.counter|add:-1 }}-apimethod">
+                      {% if apistep.apimethod == "get" %}
+                          <option value="get" selected>get</option>
+                      {% else %}
+                          <option value="get">get</option>
+                      {% endif %}
+                      {% if apistep.apimethod == "post" %}
+                          <option value="post" selected>post</option>
+                      {% else %}
+                          <option value="post">post</option>
+                      {% endif %}
+                      {% if apistep.apimethod == "put" %}
+                          <option value="put" selected>put</option>
+                      {% else %}
+                          <option value="put">put</option>
+                      {% endif %}
+                      {% if apistep.apimethod == "delete" %}
+                          <option value="delete" selected>delete</option>
+                      {% else %}
+                          <option value="delete">delete</option>
+                      {% endif %}
+                      {% if apistep.apimethod == "patch" %}
+                          <option value="patch" selected>patch</option>
+                      {% else %}
+                          <option value="patch">patch</option>
+                      {% endif %}
+
 </select>
               </td>
               <td class="field-apiparamvalue">
-                  <input type="text" name="apistep_set-{{ forloop.counter|add:-1 }}-apiparamvalue" value="{{ apistep.apiparamvalue }}" class="CharField" maxlength="5000" id="id_apistep_set-{{ forloop.counter|add:-1 }}-apiparamvalue"></input>
+                  <input type="text" name="apistep_set-{{ forloop.counter|add:-1 }}-apiparamvalue" value="{{ apistep.apiparamvalue }}" class="CharField" maxlength="5000" id="id_apistep_set-{{ forloop.counter|add:-1 }}-apiparamvalue" data-toggle="modal" data-target="#Revert" onclick="Values(this.id,this.value)">
               </td>
               <td class="field-exceptresponse">
                   <input type="text" name="apistep_set-{{ forloop.counter|add:-1 }}-exceptresponse" value="{{ apistep.exceptresponse }}" class="CharField" maxlength="200" id="id_apistep_set-{{ forloop.counter|add:-1 }}-exceptresponse">
@@ -199,7 +232,7 @@
               </td>
               <td class="field-apimethod">
                   <select name="apistep_set-{{ count }}-apimethod" id="id_apistep_set-{{ count }}-apimethod">
-  <option value="get" selected>get</option>
+                                            <option value="get" selected>get</option>
   <option value="post">post</option>
   <option value="put">put</option>
   <option value="delete">delete</option>
@@ -207,7 +240,7 @@
 </select>
               </td>
               <td class="field-apiparamvalue">
-                  <input type="text" name="apistep_set-{{ count }}-apiparamvalue" class="CharField" maxlength="5000" id="id_apistep_set-{{ count }}-apiparamvalue"></input>
+                  <input type="text" name="apistep_set-{{ count }}-apiparamvalue" class="CharField" maxlength="5000" id="id_apistep_set-{{ count }}-apiparamvalue" data-toggle="modal" data-target="#Revert" onclick="Values(this.id,this.value)">
               </td>
               <td class="field-exceptresponse">
                   <input type="text" name="apistep_set-{{ count }}-exceptresponse" class="CharField" maxlength="200" id="id_apistep_set-{{ count }}-exceptresponse">
@@ -242,7 +275,7 @@
 </select>
               </td>
               <td class="field-apiparamvalue">
-                  <input type="text" name="apistep_set-__prefix__-apiparamvalue" class="CharField" maxlength="5000" id="id_apistep_set-__prefix__-apiparamvalue"></input>
+                  <input type="text" name="apistep_set-__prefix__-apiparamvalue" class="CharField" maxlength="5000" id="id_apistep_set-__prefix__-apiparamvalue" data-toggle="modal" data-target="#Revert" onclick="Values(this.id,this.value)">
               </td>
               <td class="field-exceptresponse">
                   <input type="text" name="apistep_set-__prefix__-exceptresponse" class="CharField" maxlength="200" id="id_apistep_set-__prefix__-exceptresponse">
@@ -250,14 +283,16 @@
 
           <td class="delete"></td>
         </tr>
+
      </tbody>
    </table>
+
 </fieldset>
   </div>
 </div>
 <div class="submit-row">
 <input type="submit" value="保存" class="default" name="_save">
-    <p class="deletelink-box"><a href="/apitest_manage/delete/?id={{ apitest.id  }}" class="deletelink">删除</a></p>
+<p class="deletelink-box"><a href="/apitest_manage/delete/?id={{ apitest.id  }}" class="deletelink">删除</a></p>
 <input type="submit" value="保存并增加另一个" name="_addanother">
 <input type="submit" value="保存并继续编辑" name="_continue">
 </div>
@@ -270,7 +305,18 @@
         data-prepopulated-fields="[]">
 </script>
 </div>
-</form></div>
+    <!-- 模态框（Modal） -->
+                    <div class="modal fade" id="Revert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <input type="hidden" id="id" value = ''>
+                                <textarea id="textarea" name="textarea1" style="width:100%;height:500px;" onchange="change(this.value)">
+                                </textarea>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal -->
+                    </div>
+</form>
+          </div>
           <br class="clear">
         </div>
         <!-- END Content -->
@@ -278,6 +324,7 @@
       </div>
     </div>
 </div>
+
 <!-- END Container -->
 </body>
 </html>

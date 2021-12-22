@@ -8,7 +8,7 @@
   <script src="/static/admin/js/nav_sidebar.js" defer></script>
 
 <link rel="stylesheet" type="text/css" href="/static/admin/css/forms.css">
-
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 
 <script src="/admin/jsi18n/"></script>
 <script src="/static/admin/js/vendor/jquery/jquery.js"></script>
@@ -21,6 +21,22 @@
 <script src="/static/admin/js/prepopulate.js"></script>
 <script src="/static/admin/js/vendor/xregexp/xregexp.js"></script>
 
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+$("#Revert").modal("hide");
+
+		function change(value){
+			//获取 text 的内容
+            id1 = document.getElementById('id').value
+			document.getElementById(id1).value = value;
+		}
+        function Values(id,value){
+            $('#id').val(id)
+            $('#textarea').val(value)
+        }
+
+</script>
 
     <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/static/admin/css/responsive.css">
@@ -151,7 +167,7 @@
 </select>
               </td>
               <td class="field-apiparamvalue">
-                  <textarea type="text" name="apistep_set-0-apiparamvalue" class="vCharField" maxlength="5000" id="id_apistep_set-0-apiparamvalue"></textarea>
+                  <input type="text" name="apistep_set-0-apiparamvalue" class="vCharField" maxlength="5000" id="id_apistep_set-0-apiparamvalue" data-toggle="modal" data-target="#Revert" onclick="Values(this.id,this.value)">
               </td>
               <td class="field-exceptresponse">
                   <input type="text" name="apistep_set-0-exceptresponse" class="vCharField" maxlength="200" id="id_apistep_set-0-exceptresponse">
@@ -186,7 +202,7 @@
 </select>
               </td>
               <td class="field-apiparamvalue">
-                  <textarea type="text" name="apistep_set-__prefix__-apiparamvalue" class="vCharField" maxlength="5000" id="id_apistep_set-__prefix__-apiparamvalue"></textarea>
+                  <input type="text" name="apistep_set-__prefix__-apiparamvalue" class="vCharField" maxlength="5000" id="id_apistep_set-__prefix__-apiparamvalue" data-toggle="modal" data-target="#Revert" onclick="Values(this.id,this.value)">
               </td>
               <td class="field-exceptresponse">
                   <input type="text" name="apistep_set-__prefix__-exceptresponse" class="vCharField" maxlength="200" id="id_apistep_set-__prefix__-exceptresponse">
@@ -213,7 +229,18 @@
         data-prepopulated-fields="[]">
 </script>
 </div>
-</form></div>
+    <!-- 模态框（Modal） -->
+                    <div class="modal fade" id="Revert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <input type="hidden" id="id" value = ''>
+                                <textarea id="textarea" name="textarea1" style="width:100%;height:500px;" onchange="change(this.value)">
+                                </textarea>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal -->
+                    </div>
+</form>
+          </div>
           <br class="clear">
         </div>
         <!-- END Content -->

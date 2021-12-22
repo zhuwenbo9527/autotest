@@ -75,6 +75,8 @@ urlpatterns = [
     path('appcase_manage/', appviews.appcase_manage),
     path('appcasestep_manage/', appviews.appcasestep_manage),
     path('appstepsearch/', appviews.appstepsearch),
-    path('appsearch/', appviews.appsearch)
+    path('appsearch/', appviews.appsearch),
+
+    path('welcome/', views.welcome)
 
 ]

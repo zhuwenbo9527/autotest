@@ -6,7 +6,7 @@ from apitest.models import Apitest, Apistep, Apis, Users, Product
 from django.contrib.auth import authenticate, login
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger, InvalidPage
 from django.views.decorators.clickjacking import xframe_options_sameorigin
-from django.views.generic import ListView
+from django.views.decorators.clickjacking import xframe_options_exempt
 from .form import ApitestModelForm, ApistepModelFormSet
 import pymysql
 
@@ -14,7 +14,7 @@ import pymysql
 def test(request):
     return HttpResponse("hello world") #返回Httpresponse
 
-
+@login_required
 def home(request):
     return render(request, 'home.html')
 
@@ -148,13 +148,13 @@ def apistepsearch(request):
     return apistep_manage(request, apisteps_list=apisteps_list)
 
 
-@xframe_options_sameorigin
+@login_required
 def left(request):
     return render(request, "left.html")
 # Create your views here.
 
 
-@xframe_options_sameorigin
+@login_required
 def apis_add(request):
     return render(request, "apis_add.html")
 
@@ -232,16 +232,22 @@ def apitest_add(request):
 def apitest_add_submit(request):
     if request.POST:
         t_form = ApitestModelForm(request.POST)
-        # t_form.instance.Product_id = Product.objects.get(id= request.POST.get("Product_id")).id
+        _save = request.POST.get("_save")
+        _addanother = request.POST.get("_addanother")
+        _continue = request.POST.get("_continue")
         if t_form.is_valid():
             t = t_form.save(commit=False)
             t.save()
-
             i_formset = ApistepModelFormSet(request.POST, instance=t)
             if i_formset.is_valid():
                 i_formset.save()
-                return apitest_manage(request)
-    return apitest_manage(request)
+
+                if _save:
+                    return apitest_manage(request)
+                if _addanother:
+                    return apitest_add(request)
+                if _continue:
+                    return apitest_update(request, id=t.id)
 
 
 def apitest_update(request, id=None):
@@ -272,7 +278,8 @@ def apitest_update_submit(request):
                 if _addanother:
                     return apitest_add(request)
                 if _continue:
-                    return apitest_update(request, id=apitest_id)
+                    return apitest_update(request, id=t.id)
+        return apitest_update(request, id=t.id)
 
 
 def apitest_delete(request, id=None):
@@ -290,3 +297,8 @@ def apitest_delete_submit(request):
         Apistep.objects.filter(Apitest_id=id).update(isdelete=1)
         return apitest_manage(request, message="删除成功")
     pass
+
+
+def welcome(request):
+    return render(request, "welcome.html")
+

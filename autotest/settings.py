@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
     'apitest',
     'product',
     'bug',
@@ -49,6 +50,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -125,14 +127,20 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
+# Static files (css, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+HERE = os.path.dirname(os.path.abspath(__file__))
+HERE = os.path.join(HERE, '../')
+STATICFILES_DIRS = (os.path.join(HERE, 'static/'),)
+
 # 解决django3.2版本Frame问题
-ALLOWED_HOSTS = ['192.168.220.140:8080', '192.168.220.140']
-XS_SHARING_ALLOWED_METHODS = ['POST','GET','OPTIONS', 'PUT', 'DELETE']
-X_FRAME_OPTIONS = 'ALLOWALL 192.168.220.140:8080'
+ALLOWED_HOSTS = ['*']
+
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+
+
 # 解决django3.2版本隐式主键问题
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
