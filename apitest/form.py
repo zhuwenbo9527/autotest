@@ -1,6 +1,7 @@
 from django import forms
 from . import models
 
+
 class ApitestModelForm(forms.ModelForm):
     class Meta:
         model = models.Apitest
@@ -10,6 +11,7 @@ class ApitestModelForm(forms.ModelForm):
                   'apiteststory',
                   'apitestresult',
                   'apitester',)
+
 
 class ApistepModelForm(forms.ModelForm):
     class Meta:

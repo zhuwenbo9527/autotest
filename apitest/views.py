@@ -12,7 +12,8 @@ import pymysql
 
 
 def test(request):
-    return HttpResponse("hello world") #返回Httpresponse
+    # 返回Httpresponse
+    return HttpResponse("hello world")
 
 @login_required
 def home(request):

@@ -44,7 +44,7 @@ class Apistep(models.Model):
     apistatus = models.BooleanField('是否通过', blank=True)
     isdelete = models.SmallIntegerField('是否删除', default=0)
     create_time = models.DateTimeField('创建时间', auto_now=True)
-    #创建时间，自动获取当前时间
+    # 创建时间，自动获取当前时间
 
     def __str__(self):
         return self.title
@@ -99,3 +99,34 @@ class Users(models.Model):
 
     def __str__(self):
         return self.environment
+
+
+class Pre(models.Model):
+    # 关联接口ID
+    Apistep = models.ForeignKey(Apistep, on_delete=models.CASCADE)
+    # 关联接口ID
+    id = models.BigAutoField(primary_key=True)
+    PRE_TYPE = (('0', 'JDBC PreProcessor'),)
+    method = models.CharField(verbose_name='请求方法', choices=PRE_TYPE, default='0', max_length=200)
+    extend = models.CharField('扩展字段', max_length=500, default='null', blank=True)
+    # 创建时间，自动获取当前时间
+    create_time = models.DateTimeField('创建时间', auto_now=True)
+
+    def __str__(self):
+        return "前置处理"
+
+
+class Post(models.Model):
+
+    # 关联接口ID
+    Apistep = models.ForeignKey(Apistep, on_delete=models.CASCADE)
+    # 关联接口ID
+    id = models.BigAutoField(primary_key=True)
+    POST_TYPE = (('0', 'JDBC PreProcessor'),)
+    method = models.CharField(verbose_name='请求方法', choices=POST_TYPE, default='0', max_length=200)
+    extend = models.CharField('扩展字段', max_length=500, default='null', blank=True)
+    # 创建时间，自动获取当前时间
+    create_time = models.DateTimeField('创建时间', auto_now=True)
+
+    def __str__(self):
+        return "后置处理"
