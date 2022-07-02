@@ -40,13 +40,13 @@ td {overflow: auto;height: auto}
 </head>
 <body role="document">
 <!--导航栏-->
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
-    <div class="container">
-        <a class="navbar-brand" href="#">&nbsp;</a>
-        <ul class = "nav justify-content-center">
+<nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
+    <div class = "container">
+            <a class = "navbar-brand" href="#">&nbsp;</a>
+            <ul class = "nav justify-content-center">
             </ul>
-            <u1 class="nav justify-content-end">
-                <li ><a style="color:white" href="../admin/">欢迎您,{{ user }}  &nbsp;&nbsp;</a></li>
+            <u1 class="nav justify-content-right">
+                <li ><a style="color:white">欢迎您,{{ user }}  &nbsp;&nbsp;</a></li>
                 <li><a style="color:white" href="/logout/" target="_top">退出</a></li>
             </u1>
     </div>
@@ -63,61 +63,7 @@ td {overflow: auto;height: auto}
 <div style="margin-top: 15px;">
 <a class="button_add" href="../apis_manage/add/">新增</a>
 </div>
-<!--翻页功能-->
-<nav>
-    <span style = "position: absolute;right:100px;bottom: 5px">
-    <ul class="pagination justify-content-center">
-            <li class="page-item">
-                <a class="page-link" href="/apis_manage/?page={{ apis_account }}">共{{ apis_account }}条</a>
-            </li>
-        {% if apis.has_previous %}
-            <li class="page-item">
-                <a class="page-link" href="/apis_manage/?page={{ apis.previous_page_number }}">&laquo;</a>
-            </li>
-        {% endif %}
 
-        {% if left_has_more %}
-            <li class="page-item">
-                <a class="page-link" href="/apis_manage/?page=1">1</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="javascript: void(0);">...</a>
-            </li>
-        {% endif %}
-
-        {% for page in left_page_range %}
-            <li class="page-item">
-                <a class="page-link" href="/apis_manage/?page={{ page }}">{{ page }}</a>
-            </li>
-        {% endfor %}
-
-        <li class="page-item active">
-            <a class="page-link" href="javascript: void(0);">{{ apis.number }}</a>
-        </li>
-
-        {% for page in right_page_range %}
-            <li class="page-item">
-                <a class="page-link" href="/apis_manage/?page={{ page }}">{{ page }}</a>
-            </li>
-        {% endfor %}
-
-        {% if right_has_more %}
-            <li class="page-item">
-                <a class="page-link" href="javascript: void(0);">...</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="/apis_manage/?page={{ paginator.num_pages }}">{{ paginator.num_pages }}</a>
-            </li>
-        {% endif %}
-
-        {% if apis.has_next %}
-            <li class="page-item">
-                <a class="page-link" href="/apis_manage/?page={{ apis.next_page_number }}">&raquo;</a>
-            </li>
-        {% endif %}
-    </ul>
-    </span>
-</nav>
 <!--单一接口测试用例-->
 {% if message %}
 <script>
@@ -174,5 +120,60 @@ td {overflow: auto;height: auto}
     </table>
     </div>
     </div>
+<!--翻页功能-->
+<div>
+    <span style = "position: absolute;right:100px;bottom: 5px">
+    <ul class="pagination justify-content-center">
+            <li class="page-item">
+                <a class="page-link" href="/apis_manage/?page={{ apis_account }}">共{{ apis_account }}条</a>
+            </li>
+        {% if apis.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="/apis_manage/?page={{ apis.previous_page_number }}">&laquo;</a>
+            </li>
+        {% endif %}
+
+        {% if left_has_more %}
+            <li class="page-item">
+                <a class="page-link" href="/apis_manage/?page=1">1</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="javascript: void(0);">...</a>
+            </li>
+        {% endif %}
+
+        {% for page in left_page_range %}
+            <li class="page-item">
+                <a class="page-link" href="/apis_manage/?page={{ page }}">{{ page }}</a>
+            </li>
+        {% endfor %}
+
+        <li class="page-item active">
+            <a class="page-link" href="javascript: void(0);">{{ apis.number }}</a>
+        </li>
+
+        {% for page in right_page_range %}
+            <li class="page-item">
+                <a class="page-link" href="/apis_manage/?page={{ page }}">{{ page }}</a>
+            </li>
+        {% endfor %}
+
+        {% if right_has_more %}
+            <li class="page-item">
+                <a class="page-link" href="javascript: void(0);">...</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="/apis_manage/?page={{ paginator.num_pages }}">{{ paginator.num_pages }}</a>
+            </li>
+        {% endif %}
+
+        {% if apis.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="/apis_manage/?page={{ apis.next_page_number }}">&raquo;</a>
+            </li>
+        {% endif %}
+    </ul>
+    </span>
+</div>
     </body>
 </html>

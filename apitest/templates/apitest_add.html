@@ -61,25 +61,13 @@ $("#Revert").modal("hide");
 <form method="post" id="apitest_form" action="/apitest_manage/add/submit/">
 {% csrf_token %}
     <div>
-
-
-
   <fieldset class="module aligned ">
-
-
-
         <div class="form-row field-Product">
-
-
                 <div>
-
-
                         <label class="required" for="id_Product">Product:</label>
-
                             <div class="related-widget-wrapper">
     <select name="Product" required id="id_Product">
   <option value="" selected>---------</option>
-
   <option value="1">高保真环境ERP后台</option>
 
 </select>
@@ -136,24 +124,24 @@ $("#Revert").modal("hide");
          </th>
          <th class="column-exceptresponse required">期望响应
          </th>
-     <th>删除？</th>
+     <th>操作</th>
      </tr></thead>
      <tbody>
         <tr class="form-row "
              id="apistep_set-0">
-        <td class="original">
-          <input type="hidden" name="apistep_set-0-id" id="id_apistep_set-0-id">
-          <input type="hidden" name="apistep_set-0-Apitest" id="id_apistep_set-0-Apitest">
-        </td>
-              <td class="field-waittime">
-                  <input type="text" name="apistep_set-0-waittime" class="vCharField" maxlength="10" id="id_apistep_set-0-waittime">
-              </td>
-              <td class="field-title">
-                  <input type="text" name="apistep_set-0-title" class="vCharField" maxlength="200" id="id_apistep_set-0-title">
-              </td>
-              <td class="field-url">
-                  <input type="text" name="apistep_set-0-url" class="vCharField" maxlength="150" id="id_apistep_set-0-url">
-              </td>
+            <td class="original">
+              <input type="hidden" name="apistep_set-0-id" id="id_apistep_set-0-id">
+              <input type="hidden" name="apistep_set-0-Apitest" id="id_apistep_set-0-Apitest">
+            </td>
+            <td class="field-waittime">
+              <input type="text" name="apistep_set-0-waittime" class="vCharField" maxlength="10" id="id_apistep_set-0-waittime">
+            </td>
+            <td class="field-title">
+              <input type="text" name="apistep_set-0-title" class="vCharField" maxlength="200" id="id_apistep_set-0-title">
+            </td>
+            <td class="field-url">
+                <input type="text" name="apistep_set-0-url" class="vCharField" maxlength="150" id="id_apistep_set-0-url">
+            </td>
               <td class="field-headers">
                   <input type="text" name="apistep_set-0-headers" class="vCharField" maxlength="100" id="id_apistep_set-0-headers">
               </td>
